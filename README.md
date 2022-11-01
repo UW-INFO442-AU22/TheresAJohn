@@ -1,4 +1,4 @@
-# TheresAJohn - Website for rural area K8 students
+# TheresAJohn - Website for rural area K-8 students
 
 ## What we are building
 
