@@ -32,3 +32,4 @@ resources.
 ### P1:
 * Process bar (to show users how many resources are still needed)
 * Sort and filter tutors (adds up to display tutor page)
+* Verify school with a recognized accrediting body or Educational Service District (ESD).
