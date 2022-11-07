@@ -1,0 +1,19 @@
+{
+  "name": "theresajohn",
+  "version": "1.0.0",
+  "description": "a middleman to connect schools/teachers with donors for their needs of technologies and teaching resources",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UW-INFO442-AU22/TheresAJohn.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UW-INFO442-AU22/TheresAJohn/issues"
+  },
+  "homepage": "https://github.com/UW-INFO442-AU22/TheresAJohn#readme"
+}
