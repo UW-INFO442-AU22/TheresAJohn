@@ -11,7 +11,6 @@ How might we provide more teaching/learning resources for K-8 schools in rural
 areas?
 
 ## Why we are building it
-
 We will serve as a middleman to connect schools/teachers with donors for their needs of technologies and teaching
 resources. 
 
