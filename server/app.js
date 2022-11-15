@@ -27,6 +27,11 @@ app.use((req, res, next) => {
   next()
 })
 
+app.use('/', async (req, res, next) => {
+  console.log("hello")
+  res.json({"hello": "wassup"})
+})
+
 app.use('/api', apiRouter)
 
 app.listen(PORT, () => {
