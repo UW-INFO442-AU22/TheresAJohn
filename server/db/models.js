@@ -10,21 +10,23 @@ async function main() {
     console.log("connected to mongodb")
 
     const userSchema = new mongoose.Schema({
-        schoolName: String, 
-        userName: String, 
-        UserEmail: String, 
-        schoolAddress: String
+        firstName: { type: String, default: null },
+        lastName: { type: String, default: null }, 
+        email: { type: String, unique: true }, 
+        password: { type: String },
+        schoolName: { type: String, default: null }, 
+        schoolAddress: { type: String, default: null }
     })
 
     models.User = mongoose.model('User', userSchema)
 
     const postSchema = new mongoose.Schema({
         userID: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-        resource: String,
-        quantity: Number,
-        deadline: Date, 
-        description: String, 
-        datePosted: Date
+        resource: { type: String, default: null },
+        quantity: { type: Number, default: 1 },
+        deadline: { type: Date, default: new Date(9999, 12, 31)}, 
+        description: { type: String, default: null }, 
+        datePosted: { type: Date }
     })
 
     models.Post = mongoose.model("Post", postSchema)
