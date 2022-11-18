@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import logo from './logo.svg';
+
 import Navbar from './../widgets/Navbar'
+import FindSchool from "./../components/FindSchool.js";
+
 import './../stylesheets/App.css';
 
 function App() {
@@ -17,6 +20,7 @@ function App() {
       <header className="App-header">
         <Navbar />
       </header>
+      <FindSchool />
     </div>
   );
 }
