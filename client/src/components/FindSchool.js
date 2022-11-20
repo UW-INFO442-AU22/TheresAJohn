@@ -23,6 +23,12 @@ function FindSchool() {
       {/* Page posts */}
       <section className="school-posts" aria-labelledby="school posts">
          <SchoolPost />
+         <SchoolPost />
+         <SchoolPost />
+         <SchoolPost />
+         <SchoolPost />
+         <SchoolPost />
+         <SchoolPost />
       </section> 
     </>
   ); 

@@ -6,5 +6,7 @@
 
 .school-posts { 
   display: flex; 
+  justify-content: space-around;
   width: 100vw;
+  flex-wrap: wrap;
 }
