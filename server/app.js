@@ -34,7 +34,7 @@ app.use('/api', apiRouter)
 app.get('/', (req, res) => {
   if (req.session.isAuthenticated) {
     return res.send("Hi " + req.session.account.firstName)
-  } 
+  }
   return res.send('Welcome!')
 })
 
@@ -63,7 +63,7 @@ app.post('/register', async (req, res) => {
 
     return res.status(201).json({ status: 'success' })
   } catch {
-    return res.status(400).json({ status: 'error', error: "unsuccessful creating account, please try again later" })
+    return res.status(500).json({ status: 'error', error: "unsuccessful creating account, please try again later" })
   }
 })
 
@@ -91,7 +91,7 @@ app.get('/signin', async (req, res) => {
       return res.status(200).json({ status: "success" })
     }
   } catch {
-    return res.status(400).json({ status: 'error', error: "invalid credentials" })
+    return res.status(500).json({ status: 'error', error: "invalid credentials" })
   }
 })
 
@@ -119,7 +119,7 @@ app.delete('/', async (req, res) => {
     await req.models.User.deleteOne({ _id: req.body.userid })
     return res.json({ status: 'success' })
   } catch {
-    return res.status(400).json({ status: 'error', error: "cannot complete this action right now, please try again" })
+    return res.status(500).json({ status: 'error', error: "cannot complete this action right now, please try again" })
   }
 })
 
