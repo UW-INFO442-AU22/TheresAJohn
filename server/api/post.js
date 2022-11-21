@@ -1,9 +1,6 @@
 import express from 'express'
 let router = express.Router()
 
-/**
- * TODO: Return all posts of user
- */
 router.get('/', async (req, res, next) => {
   res.send("You've reached posts")
 })
@@ -27,7 +24,7 @@ router.post('/', async (req, res) => {
       datePosted: Date.now()
     })
     await newPost.save()
-    res.json({ "status": "success" })
+    res.json({ status: "success" })
   } catch (e) {
     res.status(500).json({ status: "error", error: e })
   }
@@ -49,7 +46,7 @@ router.patch('/complete', async (req, res) => {
     console.log(post)
     post.completed = true
     await post.save()
-    res.json({ "status": "success" })
+    res.json({ status: "success" })
   } catch (e) {
     res.status(500).json({ status: "error", error: e })
   }
@@ -83,7 +80,7 @@ router.patch('/', async (req, res) => {
       post.description = description
     }
     await post.save()
-    res.json({ "status": "success" })
+    res.json({ status: "success" })
   } catch (e) {
     res.status(500).json({ status: "error", error: e })
   }
