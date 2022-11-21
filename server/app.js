@@ -61,7 +61,7 @@ app.post('/register', async (req, res) => {
 
     await newUser.save()
 
-    return res.status(201).json({ status: 'success' })
+    return res.json({ status: 'success' })
   } catch {
     return res.status(500).json({ status: 'error', error: "unsuccessful creating account, please try again later" })
   }
@@ -88,7 +88,7 @@ app.get('/signin', async (req, res) => {
       session.account.lastName = user.lastName
       session.account.schoolName = user.schoolName
       session.account.schoolAddress = user.schoolAddress
-      return res.status(200).json({ status: "success" })
+      return res.json({ status: "success" })
     }
   } catch {
     return res.status(500).json({ status: 'error', error: "invalid credentials" })
@@ -100,11 +100,11 @@ app.get('/signout', async (req, res) => {
   res.redirect('/')
 })
 
-app.get('/error', (req, res) => res.status(500).send('server error'))
+app.get('/error', (req, res) => res.status(500).json({ status: 'error', error: "Server Error" }))
 
-app.get('/unauthorized', (req, res) => res.status(401).send('Permission denied'))
+app.get('/unauthorized', (req, res) => res.status(401).json({ status: 'error', error: "Permission Denied" }))
 
-app.delete('/', async (req, res) => {
+app.delete('/delete', async (req, res) => {
   let session = req.session
   if (!session.isAuthenticated) {
       console.log("Unauthorized: not logged in")
