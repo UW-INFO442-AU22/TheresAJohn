@@ -11,10 +11,10 @@ async function main() {
 
     const userSchema = new mongoose.Schema({
         firstName: { type: String, default: null },
-        lastName: { type: String, default: null }, 
-        email: { type: String, unique: true }, 
+        lastName: { type: String, default: null },
+        email: { type: String, unique: true },
         password: { type: String },
-        schoolName: { type: String, default: null }, 
+        schoolName: { type: String, default: null },
         schoolAddress: { type: String, default: null }
     })
 
@@ -24,8 +24,9 @@ async function main() {
         userID: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
         resource: { type: String, default: null },
         quantity: { type: Number, default: 1 },
-        deadline: { type: Date, default: new Date(9999, 12, 31)}, 
-        description: { type: String, default: null }, 
+        deadline: { type: Date, default: new Date(9999, 12, 31)},
+        description: { type: String, default: null },
+        completed: { type: Boolean, default: false},
         datePosted: { type: Date }
     })
 
