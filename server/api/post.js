@@ -1,9 +1,6 @@
 import express from 'express'
 let router = express.Router()
 
-/**
- * TODO: Return all posts of user
- */
 router.get('/', async (req, res, next) => {
   res.send("You've reached posts")
 })

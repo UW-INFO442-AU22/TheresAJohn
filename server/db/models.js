@@ -6,6 +6,7 @@ main().catch(err => console.log(err))
 
 async function main() {
     console.log("connecting to mongodb")
+    // TODO: need to change to prod
     await mongoose.connect('mongodb+srv://admin:TheresAJohnAdmin@theresajohn.lados5c.mongodb.net/test')
     console.log("connected to mongodb")
 
@@ -21,12 +22,12 @@ async function main() {
     models.User = mongoose.model('User', userSchema)
 
     const postSchema = new mongoose.Schema({
-        userID: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+        userID: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
         resource: { type: String, default: null },
         quantity: { type: Number, default: 1 },
-        deadline: { type: Date, default: new Date(9999, 12, 31)},
+        deadline: { type: Date, default: new Date(9999, 12, 31) },
         description: { type: String, default: null },
-        completed: { type: Boolean, default: false},
+        completed: { type: Boolean, default: false },
         datePosted: { type: Date }
     })
 
