@@ -3,6 +3,8 @@ import LinearProgress from "@mui/material/LinearProgress";
 import "./../stylesheets/Post.css"; 
 
 export function SchoolPost(props) { 
+
+  console.log(props.postData); 
   const handleClick = (event) => { 
     event.preventDefault(); 
     props.setPopupStatus(!props.popupStatus); 
@@ -13,15 +15,15 @@ export function SchoolPost(props) {
       <img className="post-image" src="img/renton-park-elementary.jpg" alt="renton park elementary" /> 
       <div className="post-description">
         <p><strong>Renton Park Elementary School</strong></p>
-        <p><strong>Subject: </strong>Math</p>
-        <p><strong>Grade Level: </strong>4th Grade</p>
+        <p><strong>Resource: </strong>{props.postData.resource}</p>
+        <p><strong>Description: </strong>{props.postData.description}</p>
+        <p><strong>Date Posted: </strong>{props.postData.datePosted}</p>
+        <p><strong>Deadline: </strong>{props.postData.deadline}</p>
         <br />
-        <p><strong>Contact: </strong>123-456-7890</p>
-        <p><strong>Contact Person: </strong>Dr.Smith</p>
-        <p><a className="link" href="https://rentonpark.rentonschools.us/">Link to School Website</a></p>
+        <p><strong>Status: </strong>{props.postData.completed ? "Completed" : "In-Progress"}</p>
         <br />
         <LinearProgress variant="determinate" value={90} />
-        <p>5 more tutors needed</p>
+        <p>{props.postData.quantity} more {props.postData.resource} needed</p>
       </div>
     </div>
   ); 
