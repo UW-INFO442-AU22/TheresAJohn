@@ -2,9 +2,14 @@ import React from "react";
 import LinearProgress from "@mui/material/LinearProgress";
 import "./../stylesheets/Post.css"; 
 
-export function SchoolPost() { 
+export function SchoolPost(props) { 
+  const handleClick = (event) => { 
+    event.preventDefault(); 
+    props.setPopupStatus(!props.popupStatus); 
+  }
+
   return(
-    <div className="post">
+    <div className="post" onClick={handleClick}>
       <img className="post-image" src="img/renton-park-elementary.jpg" alt="renton park elementary" /> 
       <div className="post-description">
         <p><strong>Renton Park Elementary School</strong></p>
