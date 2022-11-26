@@ -5,11 +5,20 @@ import "./../stylesheets/FindSchool.css";
 
 function FindSchool() {
   const [popupStatus, setPopupStatus] = useState(false); 
-  const [schoolData, setSchoolData] = useState([]); 
+  const [schoolPosts, setSchoolPosts] = useState([]); 
 
   useEffect(() => {
-    fetch("/api/posts/")
-  }, []);
+    // Fetching posts data
+    fetch("/api/posts")
+    .then(response => response.json())
+    .then(jsonData => {
+      // Mapping data into Post components
+      let posts = jsonData.map(postObject => { 
+        return <SchoolPost key={postObject._id} postData={postObject} popupStatus={popupStatus} setPopupStatus={setPopupStatus} />
+      });
+      setSchoolPosts(posts);
+    }); 
+  }, [])
 
   const buttonStyle = {
     fontSize: "1.15rem",
@@ -28,13 +37,7 @@ function FindSchool() {
 
       {/* Page posts */}
       <section className="school-posts" aria-labelledby="school posts">
-         {/* <SchoolPost popupStatus={popupStatus} setPopupStatus={setPopupStatus} />
-         <SchoolPost />
-         <SchoolPost />
-         <SchoolPost />
-         <SchoolPost />
-         <SchoolPost />
-         <SchoolPost /> */}
+        {schoolPosts}
       </section> 
 
       <h1 style={popupStatus ? {display: "block"} : {display: "none"}}>Display Popup</h1>

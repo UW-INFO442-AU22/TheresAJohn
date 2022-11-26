@@ -2,7 +2,13 @@ import express from 'express'
 let router = express.Router()
 
 router.get('/', async (req, res, next) => {
-  res.send("You've reached posts")
+  try { 
+    let posts = await req.models.Post.find(); 
+    console.log("These are the post data: ", posts); 
+    res.json(posts); 
+  } catch(err) { 
+    res.status(500).json({ status: "error", error: err })
+  }
 })
 
 router.post('/', async (req, res) => {
