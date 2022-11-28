@@ -54,12 +54,14 @@ function FindSchool() {
         <div className="content">
           <div className="post-info">
             <img className="info-item post-image" src="img/renton-park-elementary.jpg" alt="renton park elementary" /> 
+            <p className="info-item"><strong>Renton Park Elementary</strong></p>
+            <p className="info-item"><strong>https://rentonpark.rentonschools.us/</strong></p>
             <p className="info-item"><strong>Contact: </strong>{selectedPostData.personOfContact}</p>
             <p className="info-item"><strong>Resource: </strong>{selectedPostData.resource}</p>
             <p className="info-item"><strong>Description: </strong>{selectedPostData.description}</p>
             <p className="info-item"><strong>Posted: </strong>{selectedPostData.datePosted}</p>
             <p className="info-item"><strong>Status: </strong>{selectedPostData.completed ? "Completed" : "In-Progress"}</p>
-            <LinearProgress style={{marginTop: "0.5rem", width: "45%"}} variant="determinate" value={90} />
+            <LinearProgress style={{marginTop: "0.5rem", width: "90%"}} variant="determinate" value={90} />
             <br />
           </div> 
           <div className="description">
