@@ -10,13 +10,8 @@ import "./../stylesheets/FindSchool.css";
 
 function FindSchool() {
   const [togglePopup, setTogglePopup] = useState(false); 
+  const [selectedPostData, setSelectedPostData] = useState({});
   const [schoolPosts, setSchoolPosts] = useState([]); 
-
-  const handlePostClick = (event) => { 
-    console.log(event); 
-    console.log(event.target); 
-    setTogglePopup(!togglePopup); 
-  }
 
   useEffect(() => {
     // Fetching posts data
@@ -25,7 +20,7 @@ function FindSchool() {
     .then(jsonData => {
       // Mapping data into Post components
       let posts = jsonData.map(postObject => { 
-        return <SchoolPost key={postObject._id} postData={postObject} handlePostClick={handlePostClick} />
+        return <SchoolPost key={postObject._id} postData={postObject} togglePopup={togglePopup} setTogglePopup={setTogglePopup} setSelectedPostData={setSelectedPostData} />
       });
       setSchoolPosts(posts);
     }); 
@@ -35,6 +30,7 @@ function FindSchool() {
     fontSize: "1.15rem",
   }
 
+  console.log(selectedPostData); 
   return(
     <>
     {/* Page options */}
@@ -51,12 +47,26 @@ function FindSchool() {
         {schoolPosts}
       </section> 
 
-      {togglePopup && <Popup content={
+      {/* <Button onClick={handlePostClick}>Click Me!</Button> */}
+
+      {togglePopup && 
+      <Popup content={
         <>
-          <b>Design your Popup</b>
+          <p><strong>Renton Park Elementary School</strong></p>
+          <p><strong>Resource: </strong>{selectedPostData.resource}</p>
+          <p><strong>Description: </strong>{selectedPostData.description}</p>
+          <p><strong>Date Posted: </strong>{selectedPostData.datePosted}</p>
+          <p><strong>Deadline: </strong>{selectedPostData.deadline}</p>
+          <br />
+          <p><strong>Status: </strong>{selectedPostData.completed ? "Completed" : "In-Progress"}</p>
+        <br />
         </>
-      }
-      handleClose={handlePostClick} />}
+      } 
+      handleClose={
+        () => {
+          setTogglePopup(!togglePopup);
+        }
+      } />}
     </>
   ); 
 }
