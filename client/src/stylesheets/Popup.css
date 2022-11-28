@@ -10,7 +10,7 @@
 
 .box {
   position: relative;
-  width: 70%;
+  width: 50%;
   margin: 0 auto;
   height: auto;
   max-height: 70vh;
@@ -26,7 +26,7 @@
   content: 'x';
   cursor: pointer;
   position: fixed;
-  right: calc(15% - 30px);
+  right: calc(25% - 30px);
   top: calc(100vh - 85vh - 33px);
   background: #ededed;
   width: 25px;
@@ -36,4 +36,35 @@
   text-align: center;
   border: 1px solid #999;
   font-size: 20px;
+}
+
+.content { 
+  display: flex; 
+  padding: 1rem; 
+}
+
+.post-info { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: flex-start;   
+  width: 50%; 
+}
+
+.description { 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  max-width: 50%; 
+}
+
+.info-item { 
+  margin: .5rem 0; 
+}
+
+.post-image { 
+  width: 130px; 
+  height: 130px; 
+  border-radius: 50%; 
+  margin-bottom: .5rem; 
+  border: 1.5px solid black; 
 }

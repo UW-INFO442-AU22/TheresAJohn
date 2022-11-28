@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react"; 
 import Button from "@mui/material/Button";
+import LinearProgress from "@mui/material/LinearProgress";
 import { SchoolPost } from "./../widgets/Post.js"; 
 import Popup from "./../widgets/Popup.js"; 
-import "./../stylesheets/FindSchool.css";
+import "../stylesheets/FindSchool.css"; 
+import "../stylesheets/Popup.css"; 
 
 function FindSchool() {
   const [togglePopup, setTogglePopup] = useState(false); 
@@ -49,16 +51,23 @@ function FindSchool() {
       {/* Toggle popup for the post that was clicked on */}
       {togglePopup && 
       <Popup content={
-        <>
-          <p><strong>Renton Park Elementary School</strong></p>
-          <p><strong>Resource: </strong>{selectedPostData.resource}</p>
-          <p><strong>Description: </strong>{selectedPostData.description}</p>
-          <p><strong>Date Posted: </strong>{selectedPostData.datePosted}</p>
-          <p><strong>Deadline: </strong>{selectedPostData.deadline}</p>
-          <br />
-          <p><strong>Status: </strong>{selectedPostData.completed ? "Completed" : "In-Progress"}</p>
-        <br />
-        </>
+        <div className="content">
+          <div className="post-info">
+            <img className="info-item post-image" src="img/renton-park-elementary.jpg" alt="renton park elementary" /> 
+            <p className="info-item"><strong>Contact: </strong>{selectedPostData.personOfContact}</p>
+            <p className="info-item"><strong>Resource: </strong>{selectedPostData.resource}</p>
+            <p className="info-item"><strong>Description: </strong>{selectedPostData.description}</p>
+            <p className="info-item"><strong>Posted: </strong>{selectedPostData.datePosted}</p>
+            <p className="info-item"><strong>Status: </strong>{selectedPostData.completed ? "Completed" : "In-Progress"}</p>
+            <LinearProgress style={{marginTop: "0.5rem", width: "45%"}} variant="determinate" value={90} />
+            <br />
+          </div> 
+          <div className="description">
+            <p><strong>Description: </strong></p> 
+            {selectedPostData.description} la;ksjd fa
+            sdfjlak;sjd f;alksdjfal;ks jd;lfksdjla;kjdfs;kl asjakl;sjdflkajsd jkdsjlfkj fjkdlsjfiowme fjdiosjfw;me 
+          </div> 
+        </div> 
       } 
       handleClose={
         () => {

@@ -19,7 +19,7 @@ export function SchoolPost(props) {
       <img className="post-image" src="img/renton-park-elementary.jpg" alt="renton park elementary" /> 
       <div className="post-description">
         <Button size="large" variant="text" onClick={() => {openSchoolWebsite(props.postData.schoolLink)}}><strong>Renton Park Elementary</strong></Button>
-        <p><strong>Person of Contact: </strong>{props.postData.personOfContact}</p>
+        <p><strong>Contact: </strong>{props.postData.personOfContact}</p>
         <p><strong>Resource: </strong>{props.postData.resource}</p>
         <p><strong>Description: </strong>{props.postData.description}</p>
         <p><strong>Posted: </strong>{props.postData.datePosted}</p>
