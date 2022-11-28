@@ -35,7 +35,7 @@
 - returns "You've reached posts"
 
 #### /api/posts/ POST
-- pass in body: { resource, quantity, deadline, description }
+- pass in body: { contact, link, resource, quantity, deadline, description }
 - creates post, saves in database
 - returns { status: 'success' } if success
 
@@ -45,7 +45,7 @@
 - returns { status: 'success' } if success
 
 #### /api/posts/ PATCH
-- pass in body: { resource, quantity, deadline, description, postId }
+- pass in body: { resource, quantity, deadline, description, contact, link, postId }
 - patches existing post, saves in database
 - returns { status: 'success' } if success
 
@@ -54,7 +54,7 @@
 - pass in query parameter: ?email=
 - returns user info { _id, firstName, lastName, email, schoolName, schoolAddress } if success
 
-#### /api/users/update PATCH 
+#### /api/users/update PATCH
 - pass in { email, schoolName, schoolAddress, firstName, lastName }
     - only email is required
 - patches existing user, saves in database
@@ -67,7 +67,6 @@
 * userID: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 * resource: { type: String, default: null },
 * quantity: { type: Number, default: 1 },
-* deadline: { type: Date, default: new Date(9999, 12, 31) },
 * description: { type: String, default: null },
 * completed: { type: Boolean, default: false },
 * datePosted: { type: Date }
