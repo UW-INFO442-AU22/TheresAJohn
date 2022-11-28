@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react"; 
-
-// Component imports
 import Button from "@mui/material/Button";
 import { SchoolPost } from "./../widgets/Post.js"; 
 import Popup from "./../widgets/Popup.js"; 
-
-// Stylesheet imports
 import "./../stylesheets/FindSchool.css";
 
 function FindSchool() {
@@ -26,6 +22,7 @@ function FindSchool() {
     }); 
   }, [])
 
+  // Button style
   const buttonStyle = {
     fontSize: "1.15rem",
   }
@@ -49,6 +46,7 @@ function FindSchool() {
 
       {/* <Button onClick={handlePostClick}>Click Me!</Button> */}
 
+      {/* Toggle popup for the post that was clicked on */}
       {togglePopup && 
       <Popup content={
         <>
