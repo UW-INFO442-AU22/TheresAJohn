@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from "react"; 
+
+// Component imports
 import Button from "@mui/material/Button";
 import { SchoolPost } from "./../widgets/Post.js"; 
+import Popup from "./../widgets/Popup.js"; 
+
+// Stylesheet imports
 import "./../stylesheets/FindSchool.css";
 
 function FindSchool() {
-  const [popupStatus, setPopupStatus] = useState(false); 
+  const [togglePopup, setTogglePopup] = useState(false); 
   const [schoolPosts, setSchoolPosts] = useState([]); 
+
+  const handlePostClick = (event) => { 
+    console.log(event); 
+    console.log(event.target); 
+    setTogglePopup(!togglePopup); 
+  }
 
   useEffect(() => {
     // Fetching posts data
@@ -14,7 +25,7 @@ function FindSchool() {
     .then(jsonData => {
       // Mapping data into Post components
       let posts = jsonData.map(postObject => { 
-        return <SchoolPost key={postObject._id} postData={postObject} popupStatus={popupStatus} setPopupStatus={setPopupStatus} />
+        return <SchoolPost key={postObject._id} postData={postObject} handlePostClick={handlePostClick} />
       });
       setSchoolPosts(posts);
     }); 
@@ -40,7 +51,12 @@ function FindSchool() {
         {schoolPosts}
       </section> 
 
-      <h1 style={popupStatus ? {display: "block"} : {display: "none"}}>Display Popup</h1>
+      {togglePopup && <Popup content={
+        <>
+          <b>Design your Popup</b>
+        </>
+      }
+      handleClose={handlePostClick} />}
     </>
   ); 
 }

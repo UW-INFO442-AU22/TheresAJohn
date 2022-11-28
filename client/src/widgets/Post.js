@@ -4,14 +4,8 @@ import "./../stylesheets/Post.css";
 
 export function SchoolPost(props) { 
 
-  console.log(props.postData); 
-  const handleClick = (event) => { 
-    event.preventDefault(); 
-    props.setPopupStatus(!props.popupStatus); 
-  }
-
   return(
-    <div className="post" onClick={handleClick}>
+    <div className="post" onClick={props.handlePostClick}>
       <img className="post-image" src="img/renton-park-elementary.jpg" alt="renton park elementary" /> 
       <div className="post-description">
         <p><strong>Renton Park Elementary School</strong></p>
