@@ -55,7 +55,7 @@ function FindSchool() {
           <div className="post-info">
             <img className="info-item post-image" src="img/renton-park-elementary.jpg" alt="renton park elementary" /> 
             <p className="info-item"><strong>Renton Park Elementary</strong></p>
-            <p className="info-item"><strong>https://rentonpark.rentonschools.us/</strong></p>
+            <p className="info-item"><strong>{selectedPostData.schoolLink}</strong></p>
             <p className="info-item"><strong>Contact: </strong>{selectedPostData.personOfContact}</p>
             <p className="info-item"><strong>Resource: </strong>{selectedPostData.resource}</p>
             <p className="info-item"><strong>Description: </strong>{selectedPostData.description}</p>
