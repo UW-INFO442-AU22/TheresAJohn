@@ -27,10 +27,11 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  const { contact, link, resource, quantity, deadline, description } = req.body
-  if (!(resource && quantity && deadline && description && contact && link)) {
+  const { contact, link, resource, quantity, description } = req.body
+  if (!(resource && quantity && description && contact && link)) {
     return res.status(400).send("All inputs are required")
   }
+  console.log(contact, link, resource, description, quantity); 
 
   // if (!req.session.isAuthenticated) { // user not logged in
   //   console.log("Unauthorized: not logged in")

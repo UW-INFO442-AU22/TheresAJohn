@@ -69,3 +69,8 @@
   margin-bottom: .5rem; 
   border: 1.5px solid black; 
 }
+
+.input-info { 
+  display: flex; 
+  flex-wrap: wrap;
+}
