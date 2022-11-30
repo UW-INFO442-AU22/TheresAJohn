@@ -1,7 +1,7 @@
 import React from 'react';
 import "../stylesheets/Popup.css";
 
-function Popup(props) { 
+export function SchoolPopup(props) { 
   return (
     <div className="popup-box">
       <div className="box">
@@ -12,4 +12,14 @@ function Popup(props) {
   );
 }
 
-export default Popup; 
+export function PostPopup(props) { 
+  return(
+    <div className="popup-box">
+      <div className="box">
+        <span className="close-icon" onClick={props.handleClose}>x</span>
+        {props.content}
+      </div>
+    </div>
+  );
+}
+
