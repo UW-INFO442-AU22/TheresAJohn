@@ -57,9 +57,6 @@ export function Home() {
 <div class="mainDiv">
     <p>Are you a donor/tutor looking to help a school in need?</p >
     <Link class="mainButton" to={"/tutor"}>Find a School to Help</Link>
-    <a href="FindSchool.js">
-        <button class="mainButton">Find a School to Help</button>
-    </a>
 </div>
 </div>
 <div class="float-child">

@@ -6,7 +6,7 @@ import FindSchool from "./../components/FindSchool.js";
 
 import './../stylesheets/App.css';
 import {Footer} from '../widgets/Footer'
-import {CreateHomaPage} from '../homePage'
+import {CreateHomePage} from '../homePage'
 
 function App() {
   const [data, setData] = useState(null);
