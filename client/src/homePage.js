@@ -10,7 +10,7 @@ import {Footer} from './widgets/Footer'
 import Navbar from './widgets/Navbar'
 import FindSchool from "./components/FindSchool.js";
 
-export function CreateHomaPage() {
+export function CreateHomePage() {
     return(
         <BrowserRouter>
       <Routes>
@@ -57,12 +57,17 @@ export function Home() {
 <div class="mainDiv">
     <p>Are you a donor/tutor looking to help a school in need?</p >
     <Link class="mainButton" to={"/tutor"}>Find a School to Help</Link>
+    <a href="FindSchool.js">
+        <button class="mainButton">Find a School to Help</button>
+    </a>
 </div>
 </div>
 <div class="float-child">
 <div class="mainDiv">
 <p>Are you a school teacher/representative in need of teaching resources?</p >
-<button class="mainButton">Find a Tutor</button>
+<a href="registration.html">
+        <button class="mainButton">Find resources</button>
+</a>
 </div>
 </div>
 </div>

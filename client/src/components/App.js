@@ -21,10 +21,7 @@ function App() {
     <div className="App">
       <header className="App-header">
       </header>
-      <CreateHomaPage />
-   
-      {/* <Home />
-      <Footer /> */}
+      <CreateHomePage />
     </div>
   );
 }

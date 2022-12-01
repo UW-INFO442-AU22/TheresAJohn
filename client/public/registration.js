@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Educational registration form</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="registration.css" />
-  </head>
-  <body>
+import React from "react";
+import './stylesheets/App.css'
+
+export function Home() {
+    return (
     <div class="main-block">
       <div class="left-part">
         <i class="fas fa-graduation-cap"></i>
@@ -30,5 +26,5 @@
         <button type="submit" href="/">Submit</button>
       </form>
     </div>
-  </body>
-</html>
+    )
+  }
