@@ -1,10 +1,50 @@
 import React from "react";
 import './stylesheets/App.css'
+import {
+    BrowserRouter,
+    Routes, 
+    Route,
+    Link
+} from "react-router-dom";
+import {Footer} from './widgets/Footer'
+import Navbar from './widgets/Navbar'
+import FindSchool from "./components/FindSchool.js";
 
+export function CreateHomePage() {
+    return(
+        <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<CreateHome />}>
+          {/* <Route path="school" element={<Blogs />} /> */}
+        </Route>
+        <Route path="tutor" exact={true}  element={<FindSchool />} />
+      </Routes>
+    </BrowserRouter>
+    )
+
+}
+
+function CreateFindSchoolPage(){
+    return(
+        <div className="findSchool">
+            <Navbar />
+            <FindSchool />
+            <Footer />
+        </div>
+    )
+}
+
+function CreateHome() {
+    return (
+        <div class="landing-page">
+            <Home />
+            <Footer />
+        </div>
+    )
+}
 export function Home() {
     return (
-        
-        <main class="landing-page">
+        <main>
             <div class="hero-image">
       <div class="hero-text">
         <h1>Welcome to Rural school connect</h1>
@@ -16,10 +56,10 @@ export function Home() {
 <div class="float-child">
 <div class="mainDiv">
     <p>Are you a donor/tutor looking to help a school in need?</p >
+    <Link class="mainButton" to={"/tutor"}>Find a School to Help</Link>
     <a href="FindSchool.js">
         <button class="mainButton">Find a School to Help</button>
     </a>
-    
 </div>
 </div>
 <div class="float-child">
