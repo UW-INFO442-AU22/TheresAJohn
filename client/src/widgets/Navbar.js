@@ -7,9 +7,9 @@ function Navbar() {
     <nav className="navbar">
       <img className="logo" src="img/pencil-with-wings.jpg" alt="logo" />
       <ul>
-        <li>
+        {/* <li>
           <Button variant="text" size="large" style={{color: "white"}}>Find A Tutor</Button>
-        </li>
+        </li> */}
         <li>
           <Button variant="text" size="large" style={{color: "white"}}>Find A School</Button>
         </li>
