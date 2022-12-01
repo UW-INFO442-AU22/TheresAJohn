@@ -46,11 +46,7 @@ function FindSchool() {
   // Handle info submissions
   const handlePostSubmit = (event) => { 
     event.preventDefault(); 
-    console.log(contact.current.value)
-    console.log(resource.current.value)
-    console.log(website.current.value)
-    console.log(description.current.value)
-    console.log(typeof quantity.current.value) 
+    // Sending post endpoint all post input values
     fetch("/api/posts", 
     {
       method: "POST", 
@@ -65,6 +61,21 @@ function FindSchool() {
         "Content-Type": "application/json"
       }
     })
+
+    setTogglePostPopup(false); 
+
+    // Refetching all posts after update
+    fetch("/api/posts")
+    .then(response => response.json())
+    .then(jsonData => {
+      // Mapping data into Post components
+      let posts = jsonData.map(postObject => { 
+        return <SchoolPost key={postObject._id} postData={postObject} togglePopup={toggleSchoolPopup} setTogglePopup={setToggleSchoolPopup} setSelectedPostData={setSelectedPostData} />
+      });
+      setSchoolPosts(posts);
+    }); 
+
+    // Resetting input field values
     contact.current.value = ""; 
     resource.current.value = ""; 
     website.current.value = ""; 
