@@ -5,6 +5,8 @@ import Navbar from './../widgets/Navbar'
 import FindSchool from "./../components/FindSchool.js";
 
 import './../stylesheets/App.css';
+import {Footer} from '../widgets/Footer'
+import {Home, Spec} from '../homePage'
 
 function App() {
   const [data, setData] = useState(null);
@@ -21,6 +23,8 @@ function App() {
         <Navbar />
       </header>
       <FindSchool />
+      <Home />
+      <Footer />
     </div>
   );
 }

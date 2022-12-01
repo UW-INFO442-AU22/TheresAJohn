@@ -1,4 +1,140 @@
-.App {
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+/* landing page */
+html, body{
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* body{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("education.jpeg");
+  background-position: center;
+  background-size: cover; 
+} */
+
+.App{
+  height: 100vh;
+  min-height: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("education.jpeg");
+  background-position: center;
+  background-size: cover;
+
+}
+
+
+
+
+
+
+/* The hero image */
+.hero-image {
+/* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+
+
+/* Set a specific height */
+/* height: 50%; */
+
+/* Position and center the image to scale nicely on all screens */
+/* background-position: center;
+background-repeat: no-repeat;
+position: relative; */
+}
+
+/* Place text in the middle of the image */
+
+.hero-text{
+color: white;
+text-align: center;
+padding-top: 10%;
+padding-bottom: 7.5%;
+position: relative;
+}
+
+.float-container{
+  display: flex;
+  position: relative;
+}
+
+.float-child {
+  width: 50%;
+  float: left;
+  padding: 20px;
+  /* border: 2px solid black; */
+  border-radius: 20px;
+  margin: 0.3%;
+  text-align: center;
+  background-color:rgba(255,255,255,0.5);
+
+}  
+
+.mainDiv{
+  font:2vw sans-serif;
+}
+
+.mainButton{
+  padding: 20px;
+  background-color: beige;
+  margin-top: 8%;
+  font: 1.5vw sans-serif;
+
+}
+
+footer {
+  margin-top: auto;
+  position: fixed;
+  bottom: 0;
+  color: rgb(68, 54, 54);  
+}
+
+
+.flexbox-single-anime{
+  display: flex;
+  /* align-items: center; */
+  background-color: white;
+  top: 10%;
+  left: 10%;
+  right: 10%;   
+  position: absolute;
+
+}
+
+.discription-container {
+  text-align: center;
+}
+
+/* description card */
+.discription-container-title{
+  border-radius: 10px;
+  margin: 2% 5% 1% 5%;
+}
+
+/* school title in description card */
+.anime-title{
+  background-color: bisque;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Lobster', cursive;
+  border-radius: 10px 10px 0 0;
+}
+
+/* school details in description card */
+.discription-text{
+  margin-left: 5%;
+  margin-right: 3%;
+  font-family: 'Goudy Bookletter 1911', serif;
+}
+
+/* school picture */
+.poster{
+  max-width:370px; 
+  height: 330px;
+  border: 5px solid white;
+}
+
+
+/* .App {
   text-align: center;
 }
 
@@ -34,4 +170,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
