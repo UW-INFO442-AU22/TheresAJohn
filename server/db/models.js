@@ -6,25 +6,33 @@ main().catch(err => console.log(err))
 
 async function main() {
     console.log("connecting to mongodb")
+    // TODO: need to change to prod
     await mongoose.connect('mongodb+srv://admin:TheresAJohnAdmin@theresajohn.lados5c.mongodb.net/test')
     console.log("connected to mongodb")
 
     const userSchema = new mongoose.Schema({
-        schoolName: String, 
-        userName: String, 
-        UserEmail: String, 
-        schoolAddress: String
+        firstName: { type: String, default: null },
+        lastName: { type: String, default: null },
+        email: { type: String, unique: true },
+        password: { type: String },
+        schoolName: { type: String, default: null },
+        schoolAddress: { type: String, default: null }
     })
 
     models.User = mongoose.model('User', userSchema)
 
     const postSchema = new mongoose.Schema({
-        userID: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-        resource: String,
-        quantity: Number,
-        deadline: Date, 
-        description: String, 
-        datePosted: Date
+        userID: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        schoolName: { type: String }, 
+        personOfContact: { type: String },
+        contactEmail: { type: String }, 
+        schoolLink: { type: String },
+        resource: { type: String, default: null },
+        quantity: { type: Number, default: 1 },
+        quantityDonated: { type: Number, default: 0 }, 
+        description: { type: String, default: null },
+        completed: { type: Boolean, default: false },
+        datePosted: { type: Date }
     })
 
     models.Post = mongoose.model("Post", postSchema)
