@@ -160,8 +160,7 @@ function FindSchool() {
                 Description: 
               </strong>
             </p> 
-            {selectedPostData.description} la;ksjd fa
-            sdfjlak;sjd f;alksdjfal;ks jd;lfksdjla;kjdfs;kl asjakl;sjdflkajsd jkdsjlfkj fjkdlsjfiowme fjdiosjfw;me 
+            {selectedPostData.description}
           </div> 
         </div> 
       } 
