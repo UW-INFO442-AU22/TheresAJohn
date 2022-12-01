@@ -12,14 +12,25 @@ function FindSchool() {
   const [togglePostPopup, setTogglePostPopup] = useState(false);  
   const [selectedPostData, setSelectedPostData] = useState({});
   const [schoolPosts, setSchoolPosts] = useState([]);
+  const [invalidFields, setInvalidFields] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
   
-  const schoolName = useRef("");
   const contact = useRef(""); 
-  const email = useRef(""); 
   const website = useRef(""); 
   const resource = useRef(""); 
   const quantity = useRef(1); 
   const description = useRef(""); 
+
+  // Button style
+  const buttonStyle = {
+    fontSize: "1.15rem"
+  }
+  
+  // Text Field style
+  const textFieldStyle = {
+    width: "45%", 
+    padding: "1rem"
+  }
 
   useEffect(() => {
     // Fetching posts data
@@ -34,71 +45,91 @@ function FindSchool() {
     }); 
   }, [])
 
-  // Button style
-  const buttonStyle = {
-    fontSize: "1.15rem"
-  }
-  
-  // Text Field style
-  const textFieldStyle = {
-    width: "45%", 
-    padding: "1rem"
+  function validInputs() { 
+    let validInput = true;
+    if (contact.current.value === "") { 
+      invalidFields.push("Contact Person"); 
+      validInput = false; 
+    } 
+    if (website.current.value == "") { 
+      invalidFields.push("School Website"); 
+      validInput = false; 
+    }
+    if (resource.current.value == "") { 
+      invalidFields.push("Resource"); 
+      validInput = false; 
+    }
+    if (quantity.current.value <= 0) { 
+      invalidFields.push("Quantity"); 
+      validInput = false; 
+    }
+    if (description.current.value == "") { 
+      invalidFields.push("Description"); 
+      validInput = false; 
+    }
+    setInvalidFields([...invalidFields]);
+    console.log(invalidFields);  
+    return validInput; 
   }
 
   // Handle info submissions
   const handlePostSubmit = (event) => { 
     event.preventDefault(); 
-    // Sending post endpoint all post input values
-    fetch("/api/posts", 
-    {
-      method: "POST", 
-      body: JSON.stringify({
-        schoolName: schoolName.current.value, 
-        contact: contact.current.value, 
-        email: email.current.value, 
-        link: website.current.value, 
-        resource: resource.current.value, 
-        quantity: quantity.current.value,
-        description: description.current.value
-      }), 
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
 
-    console.log(schoolName.current.value); 
-
-    setTogglePostPopup(false); 
-
-    // Refetching all posts after update
-    fetch("/api/posts")
-    .then(response => response.json())
-    .then(jsonData => {
-      // Mapping data into Post components
-      let posts = jsonData.map(postObject => { 
-        return <SchoolPost key={postObject._id} postData={postObject} togglePopup={toggleSchoolPopup} setTogglePopup={setToggleSchoolPopup} setSelectedPostData={setSelectedPostData} />
-      });
-      setSchoolPosts(posts);
-    }); 
-
-    // Resetting input field values
-    schoolName.current.value = ""; 
-    contact.current.value = ""; 
-    email.current.value = ""; 
-    resource.current.value = ""; 
-    website.current.value = ""; 
-    description.current.value = "";
-    quantity.current.value = 1; 
+    // Checking for any empty input fields
+    if (!validInputs()) { 
+      setErrorMessage("Please fill out all the following fields with the proper values before submitting: \n\n" + [...invalidFields].join(", "));
+      return; 
+    } else { 
+      // Sending post endpoint all post input values
+      fetch("/api/posts", 
+      {
+        method: "POST", 
+        body: JSON.stringify({
+          contact: contact.current.value, 
+          link: website.current.value, 
+          resource: resource.current.value, 
+          quantity: quantity.current.value,
+          description: description.current.value
+        }), 
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      
+      
+      setTogglePostPopup(false); 
+      
+      // Refetching all posts after update
+      fetch("/api/posts")
+      .then(response => response.json())
+      .then(jsonData => {
+        // Mapping data into Post components
+        let posts = jsonData.map(postObject => { 
+          return <SchoolPost key={postObject._id} postData={postObject} togglePopup={toggleSchoolPopup} setTogglePopup={setToggleSchoolPopup} setSelectedPostData={setSelectedPostData} />
+        });
+        setSchoolPosts(posts);
+      }); 
+      
+      // Resetting input field values
+      contact.current.value = ""; 
+      resource.current.value = ""; 
+      website.current.value = ""; 
+      description.current.value = "";
+      quantity.current.value = 1; 
+      setInvalidFields([]); 
+      setErrorMessage("");
+    }
   }
-
-  // Handle clicks made on post button
-  const handlePostButtonClick = (event) => { 
-    event.preventDefault(); 
-    setTogglePostPopup(!togglePostPopup); 
-  }
-
-  return(
-    <>
+    
+    // Handle clicks made on post button
+    const handlePostButtonClick = (event) => { 
+      event.preventDefault(); 
+      setTogglePostPopup(!togglePostPopup); 
+    }
+    
+    return(
+      <>
     {/* Page options */}
       <div className="options">
         <div>
@@ -121,20 +152,9 @@ function FindSchool() {
             <img className="info-item post-image" src="img/renton-park-elementary.jpg" alt="renton park elementary" /> 
             <p className="info-item">
               <strong>
-                {selectedPostData.schoolName}
-              </strong>
-            </p>
-            <p className="info-item">
-              <strong>
                 Contact: 
               </strong>
               {selectedPostData.personOfContact}
-            </p>
-            <p className="info-item">
-              <strong>
-                Contact-Email: 
-              </strong>
-              {selectedPostData.contactEmail}
             </p>
             <p className="info-item">
               <strong>
@@ -205,23 +225,9 @@ function FindSchool() {
             <div className="input-info">
               <TextField style={textFieldStyle}
                 required
-                inputRef={schoolName}
-                id="outlined-required"
-                label="School Name"
-                type="text"
-              />
-              <TextField style={textFieldStyle}
-                required
                 inputRef={contact}
                 id="outlined-required"
                 label="Contact Person"
-                type="text"
-              />
-              <TextField style={textFieldStyle}
-                required
-                inputRef={email}
-                id="outlined-required"
-                label="Email"
                 type="text"
               />
               <TextField style={textFieldStyle}
@@ -244,6 +250,7 @@ function FindSchool() {
                 id="outlined-required"
                 label="Quantity Needed"
                 type="number"
+                inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
               />
               <TextField style={textFieldStyle}
                 required
@@ -253,7 +260,10 @@ function FindSchool() {
                 type="text"
               />
             </div>
-            <Button variant="text" onClick={handlePostSubmit}>Submit</Button>
+            <p style={{color: "red"}}>{errorMessage}</p>
+            <Button variant="text" onClick={handlePostSubmit}>
+              Submit
+            </Button>
           </>
         } 
         handleClose={handlePostButtonClick}
