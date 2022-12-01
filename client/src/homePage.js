@@ -16,13 +16,18 @@ export function Home() {
 <div class="float-child">
 <div class="mainDiv">
     <p>Are you a donor/tutor looking to help a school in need?</p >
-    <button class="mainButton">Find a School to Help</button>
+    <a href="FindSchool.js">
+        <button class="mainButton">Find a School to Help</button>
+    </a>
+    
 </div>
 </div>
 <div class="float-child">
 <div class="mainDiv">
 <p>Are you a school teacher/representative in need of teaching resources?</p >
-<button class="mainButton">Find a Tutor</button>
+<a href="registration.html">
+        <button class="mainButton">Find resources</button>
+</a>
 </div>
 </div>
 </div>
