@@ -27,8 +27,8 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  const { contact, link, resource, quantity, description } = req.body
-  if (!(resource && quantity && description && contact && link)) {
+  const { schoolName, contact, email, link, resource, quantity, description } = req.body
+  if (!(schoolName && email && resource && quantity && description && contact && link)) {
     return res.status(400).send("All inputs are required")
   }
   console.log(contact, link, resource, description, quantity); 
@@ -39,7 +39,9 @@ router.post('/', async (req, res) => {
   // }
   try {
     const newPost = new req.models.Post({
+      schoolName: schoolName,
       personOfContact: contact,
+      contactEmail: email,
       schoolLink: link,
       resource: resource,
       quantity: quantity,

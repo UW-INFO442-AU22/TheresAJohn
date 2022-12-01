@@ -13,7 +13,9 @@ function FindSchool() {
   const [selectedPostData, setSelectedPostData] = useState({});
   const [schoolPosts, setSchoolPosts] = useState([]);
   
+  const schoolName = useRef("");
   const contact = useRef(""); 
+  const email = useRef(""); 
   const website = useRef(""); 
   const resource = useRef(""); 
   const quantity = useRef(1); 
@@ -51,7 +53,9 @@ function FindSchool() {
     {
       method: "POST", 
       body: JSON.stringify({
+        schoolName: schoolName.current.value, 
         contact: contact.current.value, 
+        email: email.current.value, 
         link: website.current.value, 
         resource: resource.current.value, 
         quantity: quantity.current.value,
@@ -61,6 +65,8 @@ function FindSchool() {
         "Content-Type": "application/json"
       }
     })
+
+    console.log(schoolName.current.value); 
 
     setTogglePostPopup(false); 
 
@@ -76,7 +82,9 @@ function FindSchool() {
     }); 
 
     // Resetting input field values
+    schoolName.current.value = ""; 
     contact.current.value = ""; 
+    email.current.value = ""; 
     resource.current.value = ""; 
     website.current.value = ""; 
     description.current.value = "";
@@ -113,12 +121,7 @@ function FindSchool() {
             <img className="info-item post-image" src="img/renton-park-elementary.jpg" alt="renton park elementary" /> 
             <p className="info-item">
               <strong>
-                Renton Park Elementary
-              </strong>
-            </p>
-            <p className="info-item">
-              <strong>
-                {selectedPostData.schoolLink}
+                {selectedPostData.schoolName}
               </strong>
             </p>
             <p className="info-item">
@@ -126,6 +129,12 @@ function FindSchool() {
                 Contact: 
               </strong>
               {selectedPostData.personOfContact}
+            </p>
+            <p className="info-item">
+              <strong>
+                Contact-Email: 
+              </strong>
+              {selectedPostData.contactEmail}
             </p>
             <p className="info-item">
               <strong>
@@ -141,6 +150,11 @@ function FindSchool() {
             </p>
             <p className="info-item">
               <strong>
+                {selectedPostData.schoolLink}
+              </strong>
+            </p>
+            <p className="info-item">
+              <strong>
                 Posted: 
               </strong>
               {selectedPostData.datePosted}
@@ -151,7 +165,7 @@ function FindSchool() {
               </strong>
               {selectedPostData.completed ? "Completed" : "In-Progress"}
             </p>
-            <LinearProgress style={{marginTop: "0.5rem", width: "90%"}} variant="determinate" value={90} />
+            <LinearProgress style={{marginTop: "0.5rem", width: "90%"}} variant="determinate" value={selectedPostData.quantityDonated / selectedPostData.quantity * 100} />
             <br />
           </div> 
           <div className="description">
@@ -179,9 +193,23 @@ function FindSchool() {
             <div className="input-info">
               <TextField style={textFieldStyle}
                 required
+                inputRef={schoolName}
+                id="outlined-required"
+                label="School Name"
+                type="text"
+              />
+              <TextField style={textFieldStyle}
+                required
                 inputRef={contact}
                 id="outlined-required"
                 label="Contact Person"
+                type="text"
+              />
+              <TextField style={textFieldStyle}
+                required
+                inputRef={email}
+                id="outlined-required"
+                label="Email"
                 type="text"
               />
               <TextField style={textFieldStyle}
