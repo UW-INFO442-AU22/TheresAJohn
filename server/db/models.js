@@ -23,10 +23,13 @@ async function main() {
 
     const postSchema = new mongoose.Schema({
         userID: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        schoolName: { type: String }, 
         personOfContact: { type: String },
+        contactEmail: { type: String }, 
         schoolLink: { type: String },
         resource: { type: String, default: null },
         quantity: { type: Number, default: 1 },
+        quantityDonated: { type: Number, default: 0 }, 
         description: { type: String, default: null },
         completed: { type: Boolean, default: false },
         datePosted: { type: Date }
