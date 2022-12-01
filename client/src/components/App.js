@@ -17,17 +17,8 @@ function App() {
     <div className="App">
       <Home />
       <Footer />
-      {/* <Spec />
-      <Footer /> */}
     </div>
   );
-
-// 
- //  return (
-  //  <div className="App">
-      
-  //  </div>
-//  );
 }
 
 export default App;
