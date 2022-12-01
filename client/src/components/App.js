@@ -6,7 +6,7 @@ import FindSchool from "./../components/FindSchool.js";
 
 import './../stylesheets/App.css';
 import {Footer} from '../widgets/Footer'
-import {Home, Spec} from '../homePage'
+import {CreateHomaPage} from '../homePage'
 
 function App() {
   const [data, setData] = useState(null);
@@ -20,11 +20,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Navbar />
       </header>
-      <FindSchool />
-      <Home />
-      <Footer />
+      <CreateHomaPage />
+   
+      {/* <Home />
+      <Footer /> */}
     </div>
   );
 }
