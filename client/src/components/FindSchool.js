@@ -165,6 +165,18 @@ function FindSchool() {
               </strong>
               {selectedPostData.completed ? "Completed" : "In-Progress"}
             </p>
+            <p className="info-item">
+              <strong>
+                Quantity Requested:  
+              </strong>
+              {selectedPostData.quantity}
+            </p>
+            <p className="info-item">
+              <strong>
+                Quantity Donated: 
+              </strong>
+              {selectedPostData.quantityDonated}
+            </p>
             <LinearProgress style={{marginTop: "0.5rem", width: "90%"}} variant="determinate" value={selectedPostData.quantityDonated / selectedPostData.quantity * 100} />
             <br />
           </div> 
