@@ -7,9 +7,15 @@ label {
   font-size: 25px;
 }
 
+form { 
+  display: table;
+}
 
-form  { display: table;      }
-p     { display: table-row;  }
+p { 
+  display: table-row;
+
+}
+
 label { 
   display: table-cell; 
   position: relative;
@@ -28,8 +34,6 @@ input {
   position: relative;
   left: 40%;
 }
-
-
 
 input[type=submit] {
   width: 60%;

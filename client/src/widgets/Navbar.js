@@ -1,8 +1,8 @@
-import React from "react"; 
+import React from "react";
 import Button from "@mui/material/Button";
-import "./../stylesheets/Navbar.css";
+import "../stylesheets/Navbar.css";
 
-function Navbar() { 
+function Navbar() {
   return (
     <nav className="navbar">
       <img className="logo" src="img/pencil-with-wings.jpg" alt="logo" />
@@ -11,7 +11,7 @@ function Navbar() {
           <Button variant="text" size="large" style={{color: "white"}}>Find A Tutor</Button>
         </li> */}
         <li>
-          <Button variant="text" size="large" style={{color: "white"}}>Find A School</Button>
+          <Button variant="text" size="large" style={{ color: "white" }}>Find A School</Button>
         </li>
       </ul>
     </nav>

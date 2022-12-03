@@ -23,10 +23,6 @@ html, body{
   background-size: cover;
 }
 
-
-
-
-
 /* The hero image */
 .hero-image {
 /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
@@ -65,7 +61,6 @@ position: relative;
   margin: 0.3%;
   text-align: center;
   background-color:rgba(255,255,255,0.5);
-
 }  
 
 .mainDiv{
