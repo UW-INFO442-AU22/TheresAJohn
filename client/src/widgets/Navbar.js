@@ -5,7 +5,7 @@ import "../stylesheets/Navbar.css";
 function Navbar() {
   return (
     <nav className="navbar">
-      <img className="logo" src="img/pencil-with-wings.jpg" alt="logo" />
+      <img className="logo" src="../../public/img/pencil-with-wings.jpg" alt="logo" />
       <ul>
         {/* <li>
           <Button variant="text" size="large" style={{color: "white"}}>Find A Tutor</Button>

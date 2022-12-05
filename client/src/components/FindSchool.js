@@ -98,7 +98,7 @@ function FindSchool() {
   }
 
   // to get info about logged in user
-  const LoggedInUser = sessionStorage.getItem("email")
+  // const LoggedInUser = sessionStorage.getItem("email")
 
   return(
     <>

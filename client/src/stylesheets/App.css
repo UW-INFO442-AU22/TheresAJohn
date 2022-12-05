@@ -1,21 +1,16 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
+
 /* landing page */
-html, body{
-  min-height: 100%;
+html, body {
   margin: 0;
-  padding: 0;
+  height: 100%;
 }
 
-/* body{
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("education.jpeg");
-  background-position: center;
-  background-size: cover; 
-} */
-
-
-.landing-page{
+.landing-page {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("education.jpeg");
   height: 100vh;
   min-height: 100%;
@@ -23,33 +18,22 @@ html, body{
   background-size: cover;
 }
 
-/* The hero image */
-.hero-image {
-/* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-
-
-/* Set a specific height */
-/* height: 50%; */
-
-/* Position and center the image to scale nicely on all screens */
-/* background-position: center;
-background-repeat: no-repeat;
-position: relative; */
-}
-
 /* Place text in the middle of the image */
-
-.hero-text{
-color: white;
-text-align: center;
-padding-top: 10%;
-padding-bottom: 7.5%;
-position: relative;
+.hero-text {
+  color: white;
+  text-align: center;
+  padding-top: 10%;
+  padding-bottom: 7.5%;
+  position: relative;
+}
+.hero-text p {
+  font-size: 20px;
 }
 
-.float-container{
+.float-container {
   display: flex;
   position: relative;
+  height: 280px;
 }
 
 .float-child {
@@ -60,36 +44,49 @@ position: relative;
   border-radius: 20px;
   margin: 0.3%;
   text-align: center;
-  background-color:rgba(255,255,255,0.5);
-}  
-
-.mainDiv{
-  font:2vw sans-serif;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
-.mainButton{
-  padding: 20px;
-  background-color: beige;
-  margin-top: 8%;
-  font: 1.5vw sans-serif;
+.mainDiv {
+  font: 2vw sans-serif;
+}
 
+.mainDiv p {
+  padding: 10px;
+}
+
+.mainButton-home {
+  padding: 20px 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+  border: none;
+  background: bisque;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 400;
+  color: black;
+  width: 100%
+}
+
+.mainButton-home:hover {
+  background: #ffa242;
 }
 
 footer {
   margin-top: auto;
   position: fixed;
   bottom: 0;
-  color: rgb(68, 54, 54);  
+  color: rgb(68, 54, 54);
 }
 
 
-.flexbox-single-anime{
+.flexbox-single-anime {
   display: flex;
   /* align-items: center; */
   background-color: white;
   top: 10%;
   left: 10%;
-  right: 10%;   
+  right: 10%;
   position: absolute;
 
 }
@@ -99,13 +96,13 @@ footer {
 }
 
 /* description card */
-.discription-container-title{
+.discription-container-title {
   border-radius: 10px;
   margin: 2% 5% 1% 5%;
 }
 
 /* school title in description card */
-.anime-title{
+.anime-title {
   background-color: bisque;
   padding: 20px;
   text-align: center;
@@ -114,15 +111,15 @@ footer {
 }
 
 /* school details in description card */
-.discription-text{
+.discription-text {
   margin-left: 5%;
   margin-right: 3%;
   font-family: 'Goudy Bookletter 1911', serif;
 }
 
 /* school picture */
-.poster{
-  max-width:370px; 
+.poster {
+  max-width: 370px;
   height: 330px;
   border: 5px solid white;
 }
