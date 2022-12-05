@@ -15,11 +15,18 @@ function FindSchool() {
   const [invalidFields, setInvalidFields] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   
-  const contact = useRef(""); 
   const website = useRef(""); 
   const resource = useRef(""); 
   const quantity = useRef(1); 
   const description = useRef(""); 
+
+  // to get info about logged in user
+  const email = sessionStorage.getItem("email");
+  const contact = sessionStorage.getItem("fullName");
+  const schoolName = sessionStorage.getItem("schoolName");
+
+  console.log(sessionStorage);
+  console.log(email); 
 
   // Button style
   const buttonStyle = {
@@ -39,18 +46,20 @@ function FindSchool() {
     .then(jsonData => {
       // Mapping data into Post components
       let posts = jsonData.map(postObject => { 
-        return <SchoolPost key={postObject._id} postData={postObject} togglePopup={toggleSchoolPopup} setTogglePopup={setToggleSchoolPopup} setSelectedPostData={setSelectedPostData} />
+        return <SchoolPost 
+        key={postObject._id} 
+        postData={postObject} 
+        togglePopup={toggleSchoolPopup} 
+        setTogglePopup={setToggleSchoolPopup} 
+        setSelectedPostData={setSelectedPostData} />
       });
       setSchoolPosts(posts);
     }); 
   }, [])
 
+  // Check if inputs from user are valid
   function validInputs() { 
     let validInput = true;
-    if (contact.current.value === "") { 
-      invalidFields.push("Contact Person"); 
-      validInput = false; 
-    } 
     if (website.current.value == "") { 
       invalidFields.push("School Website"); 
       validInput = false; 
@@ -62,6 +71,9 @@ function FindSchool() {
     if (quantity.current.value <= 0) { 
       invalidFields.push("Quantity"); 
       validInput = false; 
+      // to get info about logged in user
+      const LoggedInUser = sessionStorage.getItem("email")
+      console.log(LoggedInUser); 
     }
     if (description.current.value == "") { 
       invalidFields.push("Description"); 
@@ -86,7 +98,9 @@ function FindSchool() {
       {
         method: "POST", 
         body: JSON.stringify({
-          contact: contact.current.value, 
+          schoolName: schoolName, 
+          contact: contact,
+          email: email, 
           link: website.current.value, 
           resource: resource.current.value, 
           quantity: quantity.current.value,
@@ -96,7 +110,6 @@ function FindSchool() {
           "Content-Type": "application/json"
         }
       })
-      
       
       setTogglePostPopup(false); 
       
@@ -128,9 +141,6 @@ function FindSchool() {
       setTogglePostPopup(!togglePostPopup); 
     }
     
-  // to get info about logged in user
-  const LoggedInUser = sessionStorage.getItem("email")
-  console.log(LoggedInUser); 
 
   return(
     <>
@@ -229,13 +239,6 @@ function FindSchool() {
           <>
             <h3>Please fill out and submit this form</h3>
             <div className="input-info">
-              <TextField style={textFieldStyle}
-                required
-                inputRef={contact}
-                id="outlined-required"
-                label="Contact Person"
-                type="text"
-              />
               <TextField style={textFieldStyle}
                 required
                 inputRef={website}
