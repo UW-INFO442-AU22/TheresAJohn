@@ -1,4 +1,5 @@
 # TheresAJohn - Website for rural area K-8 students
+Lei Lei, Miranda Ma, John Nguyen, Alina Wang, Jerry Wu
 
 ## Mission Statement
 

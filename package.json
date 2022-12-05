@@ -1,5 +1,5 @@
 {
-  "name": "theresajohn",
+  "name": "nodemon",
   "version": "1.0.0",
   "description": "a middleman to connect schools/teachers with donors for their needs of technologies and teaching resources",
   "main": "app.js",
@@ -27,5 +27,8 @@
     "moment-timezone": "^0.5.39",
     "mongoose": "^6.7.2",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "react-router-dom": "^6.4.4"
   }
 }

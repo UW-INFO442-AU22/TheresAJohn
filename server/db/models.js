@@ -11,12 +11,10 @@ async function main() {
     console.log("connected to mongodb")
 
     const userSchema = new mongoose.Schema({
-        firstName: { type: String, default: null },
-        lastName: { type: String, default: null },
+        fullName: { type: String, default: null },
         email: { type: String, unique: true },
         password: { type: String },
-        schoolName: { type: String, default: null },
-        schoolAddress: { type: String, default: null }
+        schoolName: { type: String, default: null }
     })
 
     models.User = mongoose.model('User', userSchema)

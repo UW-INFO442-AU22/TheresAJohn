@@ -128,8 +128,12 @@ function FindSchool() {
       setTogglePostPopup(!togglePostPopup); 
     }
     
-    return(
-      <>
+  // to get info about logged in user
+  const LoggedInUser = sessionStorage.getItem("email")
+  console.log(LoggedInUser); 
+
+  return(
+    <>
     {/* Page options */}
       <div className="options">
         <div>
@@ -141,6 +145,8 @@ function FindSchool() {
 
       {/* Page posts */}
       <section className="school-posts" aria-labelledby="school posts">
+        {/* Test div for logged in user info */}
+        {/* <div>Name: {LoggedInUser}</div> */}
         {schoolPosts}
       </section> 
 
