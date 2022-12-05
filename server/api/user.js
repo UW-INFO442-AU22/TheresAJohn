@@ -9,11 +9,9 @@ router.get('/', async (req, res) => {
 
         res.json({
             _id: user._id, 
-            firstName: user.firstName, 
-            lastName: user.lastName, 
+            fullName: user.fullName,
             email: user.email, 
-            schoolName: user.schoolName, 
-            schoolAddress: user.schoolAddress
+            schoolName: user.schoolName
         })
     } catch(e) {
         res.status(500).json({ status: "error", error: e })
@@ -36,11 +34,8 @@ router.patch('/update', async (req, res) => {
         if (req.body.schoolAddress) {
             user.schoolAddress = req.body.schoolAddress
         }
-        if (req.body.firstName) {
-            user.firstName = req.body.firstName
-        }
-        if (req.body.lastName) {
-            user.lastName = req.body.lastName
+        if (req.body.fullName) {
+            user.fullName = req.body.fullName
         }
 
         await user.save()

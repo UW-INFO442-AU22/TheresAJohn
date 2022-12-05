@@ -33,16 +33,16 @@ app.use('/api', apiRouter)
 
 app.get('/', (req, res) => {
   if (req.session.isAuthenticated) {
-    return res.send("Hi " + req.session.account.firstName)
+    return res.send("Hi " + req.session.account.fullName)
   }
   return res.send('Welcome!')
 })
 
 app.post('/register', async (req, res) => {
   try {
-    const { firstName, lastName, email, password } = req.body
-
-    if (!(email && password && firstName && lastName)) {
+    const { fullName, schoolName, email, password } = req.body
+    console.log(fullName, schoolName, email, password)
+    if (!(email && password && fullName && schoolName)) {
       return res.status(400).send("All inputs are required")
     }
 
@@ -53,8 +53,8 @@ app.post('/register', async (req, res) => {
     let encryptedPassword = await bcrypt.hash(password, 10)
 
     const newUser = new req.models.User({
-      firstName: firstName,
-      lastName: lastName,
+      fullName: fullName, 
+      schoolName: schoolName,
       email: email.toLowerCase(),
       password: encryptedPassword
     })
@@ -67,7 +67,7 @@ app.post('/register', async (req, res) => {
   }
 })
 
-app.get('/signin', async (req, res) => {
+app.post('/signin', async (req, res) => {
   try {
     const { email, password } = req.body
     if (!(email && password)) {
@@ -84,11 +84,9 @@ app.get('/signin', async (req, res) => {
       }
       session.account.userid = user._id
       session.account.email = user.email
-      session.account.firstName = user.firstName
-      session.account.lastName = user.lastName
+      session.account.fullName = user.fullName
       session.account.schoolName = user.schoolName
-      session.account.schoolAddress = user.schoolAddress
-      return res.json({ status: "success" })
+      return res.json({ status: "success", userInfo: session.account })
     }
   } catch {
     return res.status(500).json({ status: 'error', error: "invalid credentials" })
