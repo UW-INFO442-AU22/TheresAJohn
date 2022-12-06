@@ -1,25 +1,37 @@
 import express from 'express'
 import moment from 'moment-timezone'
+import getMetaTags from './utils/metaTag.js';
+
 let router = express.Router()
 
 /**
  * Lists out all posts
  */
 router.get('/', async (req, res) => {
+  let email = req.body.email
+  let allPosts
   try {
-    let allPosts = await req.models.Post.find()
-    let result = allPosts.map((item) => {
-      let copyObj = {}
-      Object.keys(item._doc).forEach((key) => {
-        if (key === "datePosted") {
-          let convertTime = moment(item.datePosted).tz("America/Los_Angeles").format("MMM D, YYYY h:mm A z")
-          copyObj[key] = convertTime
-        } else {
-          copyObj[key] = item._doc[key]
+    if (!email) { // list out all posts
+      allPosts = await req.models.Post.find()
+    } else { // list out posts for current user
+      allPosts = await req.models.Post.find().where('email').in(email).exec()
+    }
+    let result = await Promise.all(
+      allPosts.map(async (post) => {
+        try {
+          let metaTags = await getMetaTags(post.schoolLink)
+          let convertTime = moment(post.datePosted).tz("America/Los_Angeles").format("MMM D, YYYY h:mm A z")
+          return {"id": post._id, "personOfContact": post.personOfContact, "contactEmail": post.contactEmail,
+                  "schoolLink": post.schoolLink, "schoolName": metaTags[0], "schoolImage": metaTags[1],
+                  "schoolVideo": metaTags[2], "resource": post.resource, "quantity": post.quantity,
+                  "quantityDonated": post.quantityDonated, "description": post.description,
+                  "completed": post.completed, "datePosted": convertTime
+                }
+        } catch (e) {
+          return e.message
         }
       })
-      return copyObj
-    })
+    )
     return res.json(result)
   } catch (e) {
     res.status(500).json({ status: "error", error: e })
@@ -27,31 +39,28 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  const { schoolName, contact, email, link, resource, quantity, description } = req.body
-  if (!(schoolName && email && resource && quantity && description && contact && link)) {
+  const { link, resource, quantity, description } = req.body
+  if (!(resource && quantity && description && link)) {
     return res.status(400).send("All inputs are required")
   }
-  console.log(contact, link, resource, description, quantity); 
-
-  // if (!req.session.isAuthenticated) { // user not logged in
-  //   console.log("Unauthorized: not logged in")
-  //   return res.status(401).json({ status: 'error', error: "not logged in" })
-  // }
-  try {
-    const newPost = new req.models.Post({
-      schoolName: schoolName,
-      personOfContact: contact,
-      contactEmail: email,
-      schoolLink: link,
-      resource: resource,
-      quantity: quantity,
-      description: description,
-      datePosted: Date.now()
-    })
-    await newPost.save()
-    res.json({ status: "success" })
-  } catch (e) {
-    res.status(500).json({ status: "error", error: e })
+  if (req.session.isAuthenticated) {
+    try {
+      const newPost = new req.models.Post({
+        contactEmail: req.session.account.email,
+        personOfContact: req.session.account.fullName,
+        schoolLink: link,
+        resource: resource,
+        quantity: quantity,
+        description: description,
+        datePosted: Date.now()
+      })
+      await newPost.save()
+      res.json({ status: "success" })
+    } catch (e) {
+      res.status(500).json({ status: "error", error: e })
+    }
+  } else {
+    res.status(401).json({"status": "error", "error": "not logged in"})
   }
 })
 
@@ -61,11 +70,6 @@ router.patch('/complete', async (req, res) => {
   if (!(postId)) {
     return res.status(400).send("All inputs are required")
   }
-
-  // if (!req.session.isAuthenticated) { // user not logged in
-  //   console.log("Unauthorized: not logged in")
-  //   return res.status(401).json({ status: 'error', error: "not logged in" })
-  // }
   try {
     let post = await req.models.Post.findById(postId)
     post.completed = true
@@ -79,7 +83,6 @@ router.patch('/complete', async (req, res) => {
 router.patch('/', async (req, res) => {
   const resource = req.body.resource
   const quantity = req.body.quantity
-  const deadline = req.body.deadline
   const description = req.body.description
   const personOfContact = req.body.contact
   const schoolLink = req.body.link
@@ -87,10 +90,6 @@ router.patch('/', async (req, res) => {
   if (!(postId)) {
     return res.status(400).send("All inputs are required")
   }
-  // if (!req.session.isAuthenticated) { // user not logged in
-  //   console.log("Unauthorized: not logged in")
-  //   return res.status(401).json({ status: 'error', error: "not logged in" })
-  // }
   try {
     let post = await req.models.Post.findById(postId)
     if (resource) {
@@ -98,9 +97,6 @@ router.patch('/', async (req, res) => {
     }
     if (quantity) {
       post.quantity = quantity
-    }
-    if (deadline) {
-      post.deadline = deadline
     }
     if (description) {
       post.description = description
