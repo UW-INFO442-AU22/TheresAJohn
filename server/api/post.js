@@ -82,7 +82,7 @@ router.patch('/complete', async (req, res) => {
 
 router.patch('/', async (req, res) => {
   const resource = req.body.resource
-  const quantity = req.body.quantit
+  const quantity = req.body.quantity
   const description = req.body.description
   const personOfContact = req.body.contact
   const schoolLink = req.body.link
