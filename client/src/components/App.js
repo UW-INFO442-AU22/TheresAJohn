@@ -1,5 +1,5 @@
 import React from "react"
-import { Routes, Route, Link } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import { CreateHome } from './homePage'
 import FindSchool from "./FindSchool"; 
 import Navbar from "./../widgets/Navbar";

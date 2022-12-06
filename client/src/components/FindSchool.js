@@ -20,14 +20,6 @@ function FindSchool() {
   const quantity = useRef(1); 
   const description = useRef(""); 
 
-  // to get info about logged in user
-  const email = sessionStorage.getItem("email");
-  const contact = sessionStorage.getItem("fullName");
-  const schoolName = sessionStorage.getItem("schoolName");
-
-  console.log(sessionStorage);
-  console.log(email); 
-
   // Button style
   const buttonStyle = {
     fontSize: "1.15rem"
@@ -60,11 +52,11 @@ function FindSchool() {
   // Check if inputs from user are valid
   function validInputs() { 
     let validInput = true;
-    if (website.current.value == "") { 
+    if (website.current.value === "") { 
       invalidFields.push("School Website"); 
       validInput = false; 
     }
-    if (resource.current.value == "") { 
+    if (resource.current.value === "") { 
       invalidFields.push("Resource"); 
       validInput = false; 
     }
@@ -75,7 +67,7 @@ function FindSchool() {
       const LoggedInUser = sessionStorage.getItem("email")
       console.log(LoggedInUser); 
     }
-    if (description.current.value == "") { 
+    if (description.current.value === "") { 
       invalidFields.push("Description"); 
       validInput = false; 
     }
@@ -98,9 +90,6 @@ function FindSchool() {
       {
         method: "POST", 
         body: JSON.stringify({
-          schoolName: schoolName, 
-          contact: contact,
-          email: email, 
           link: website.current.value, 
           resource: resource.current.value, 
           quantity: quantity.current.value,
@@ -125,7 +114,6 @@ function FindSchool() {
       }); 
       
       // Resetting input field values
-      contact.current.value = ""; 
       resource.current.value = ""; 
       website.current.value = ""; 
       description.current.value = "";

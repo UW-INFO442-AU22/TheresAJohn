@@ -1,15 +1,6 @@
 import React from "react"
 import '../stylesheets/App.css'
-import {
-    BrowserRouter,
-    Routes,
-    Route,
-    Link
-} from "react-router-dom"
-import { Footer } from '../widgets/Footer'
-// import Navbar from './widgets/Navbar'
-import FindSchool from "./FindSchool.js"
-import {UserAuthSignIn, UserAuthRegister} from "./UserAuth.js"
+import { Link } from "react-router-dom"
 
 // export function CreateHomePage() {
 //     return (
