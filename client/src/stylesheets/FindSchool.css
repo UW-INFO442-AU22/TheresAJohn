@@ -12,6 +12,8 @@
 .school-posts { 
   display: flex; 
   justify-content: space-around;
+  padding-left: 1rem; 
+  padding-right: 1rem; 
   width: 100vw;
   flex-wrap: wrap;
 }

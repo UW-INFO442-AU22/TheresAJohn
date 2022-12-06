@@ -1,10 +1,17 @@
-import React from "react";
-import Button from "@mui/material/Button";
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+
 import "../stylesheets/Post.css";
 
 export function SchoolPost(props) {
 
   const handlePostClick = (event) => {
+    event.preventDefault(); 
     props.setSelectedPostData(props.postData);
     props.setTogglePopup(!props.togglePopup);
   }
@@ -23,5 +30,36 @@ export function SchoolPost(props) {
         <Button size="small" style={{ float: "right" }} variant="text" onClick={handlePostClick}>Details</Button>
       </div>
     </div>
+  );
+}
+
+export function MediaCard(props) {
+
+  const handlePostClick = (event) => {
+    event.preventDefault(); 
+    props.setSelectedPostData(props.postData);
+    props.setTogglePopup(!props.togglePopup);
+  }
+
+  return (
+    <Card sx={{ width: 275, marginTop: "0.5rem", marginBottom: "0.5rem", border: "black 3px solid"}}>
+      <CardMedia
+        component="img"
+        height="200"
+        image={props.postData.schoolImage.src}
+        alt={props.postData.schoolImage.alt}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {props.postData.resource}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {props.postData.description}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small" onClick={handlePostClick}>Learn More</Button>
+      </CardActions>
+    </Card>
   );
 }

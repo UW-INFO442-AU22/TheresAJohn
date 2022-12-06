@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import LinearProgress from "@mui/material/LinearProgress";
-import { SchoolPost } from "./../widgets/Post.js"; 
+import { MediaCard } from "./../widgets/Post.js"; 
 import { SchoolPopup, PostPopup } from "./../widgets/Popup.js"; 
 import "../stylesheets/FindSchool.css"; 
 import "../stylesheets/Popup.css"; 
@@ -36,11 +36,17 @@ function FindSchool() {
     fetch("/api/posts")
     .then(response => response.json())
     .then(jsonData => {
-      console.log(jsonData); 
       // Mapping data into Post components
       let posts = jsonData.map(postObject => { 
-        console.log(postObject); 
-        return <SchoolPost key={postObject.id} postData={postObject} togglePopup={toggleSchoolPopup} setTogglePopup={setToggleSchoolPopup} setSelectedPostData={setSelectedPostData} />
+        return (
+        <MediaCard 
+          key={postObject.id} 
+          postData={postObject} 
+          togglePopup={toggleSchoolPopup} 
+          setTogglePopup={setToggleSchoolPopup} 
+          setSelectedPostData={setSelectedPostData} />
+        ) 
+      
       });
       setSchoolPosts(posts);
     }); 
@@ -105,7 +111,14 @@ function FindSchool() {
       .then(jsonData => {
         // Mapping data into Post components
         let posts = jsonData.map(postObject => { 
-          return <SchoolPost key={postObject.id} postData={postObject} togglePopup={toggleSchoolPopup} setTogglePopup={setToggleSchoolPopup} setSelectedPostData={setSelectedPostData} />
+          return (
+          <MediaCard 
+            key={postObject.id} 
+            postData={postObject} 
+            togglePopup={toggleSchoolPopup} 
+            setTogglePopup={setToggleSchoolPopup} 
+            setSelectedPostData={setSelectedPostData} />
+          ) 
         });
         setSchoolPosts(posts);
       }); 
