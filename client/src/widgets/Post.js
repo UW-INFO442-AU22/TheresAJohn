@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "@mui/material/Button";
-import "./../stylesheets/Post.css";
+import "../stylesheets/Post.css";
 
 export function SchoolPost(props) {
 
