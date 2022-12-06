@@ -1,6 +1,6 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { Routes, Route } from "react-router-dom"
-import { CreateHome } from './homePage'
+import { Home } from './homePage'
 import FindSchool from "./FindSchool";
 import Navbar from "./../widgets/Navbar";
 import {UserAuthSignIn, UserAuthRegister} from "./UserAuth.js"
@@ -9,6 +9,14 @@ import { Footer } from "./../widgets/Footer";
 import './../stylesheets/App.css'
 
 function App() {
+  const [loginStatus, setLoginStatus] = useState(false); 
+
+  useEffect(() => {
+    let status = (sessionStorage.getItem("email")) ? true : false; 
+    setLoginStatus(status); 
+    console.log(sessionStorage); 
+    console.log(loginStatus); 
+  });
 
   return (
     <div className="App">
@@ -16,8 +24,9 @@ function App() {
         <Navbar />
       </header>
       <Routes>
-        <Route path="/" element={<CreateHome />} />
-        <Route path="resource" exact={true} element={<FindSchool />} />
+        <Route path="/" element={<Home loginStatus={loginStatus} />} />
+        <Route path="school" exact={true} element={<FindSchool />} />
+        <Route path="donor" exact={true} element={<FindSchool />} />
         <Route path="signin" element={<UserAuthSignIn />} />
         <Route path="register" element={<UserAuthRegister />} />
       </Routes>

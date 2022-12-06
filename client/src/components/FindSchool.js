@@ -50,7 +50,7 @@ function FindSchool() {
       });
       setSchoolPosts(posts);
     });
-  }, [])
+  }, [toggleSchoolPopup])
 
   // Check if inputs from user are valid
   function validInputs() {
