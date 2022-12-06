@@ -3,7 +3,7 @@ import {
     Link
 } from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../stylesheets/registration.css'
+import '../stylesheets/registration.css';
 
 export function UserAuthSignIn() {
     const handleSignIn = (event) => {
