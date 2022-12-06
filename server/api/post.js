@@ -8,13 +8,17 @@ let router = express.Router()
  * Lists out all posts
  */
 router.get('/', async (req, res) => {
-  let email = req.body.email
+  let email
+  let isAuthenticated = req.session.isAuthenticated
+  if (isAuthenticated) {
+    email = req.session.account.email
+  }
   let allPosts
   try {
     if (!email) { // list out all posts
       allPosts = await req.models.Post.find()
     } else { // list out posts for current user
-      allPosts = await req.models.Post.find().where('email').in(email).exec()
+      allPosts = await req.models.Post.find().where('contactEmail').in(email).exec()
     }
     let result = await Promise.all(
       allPosts.map(async (post) => {
