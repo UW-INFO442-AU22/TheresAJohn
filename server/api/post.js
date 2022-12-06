@@ -5,7 +5,8 @@ import getMetaTags from './utils/metaTag.js';
 let router = express.Router()
 
 /**
- * Lists out all posts
+ * GET /api/post
+ * Gets posts from the database
  */
 router.get('/', async (req, res) => {
   let email
@@ -42,6 +43,10 @@ router.get('/', async (req, res) => {
   }
 })
 
+/**
+ * POST /api/post
+ * Create a new resource on the database
+ */
 router.post('/', async (req, res) => {
   const { link, resource, quantity, description } = req.body
   if (!(resource && quantity && description && link)) {
@@ -68,6 +73,26 @@ router.post('/', async (req, res) => {
   }
 })
 
+
+/**
+ * PATCH /api/post/donate
+ */
+router.patch('/donate', async (req, res) => {
+  const postId = req.body.postID
+  const quantity = req.body.quantityDonated
+  if (!(postId)) {
+    return res.status(400).send("All inputs are required")
+  }
+  try {
+    let post = await req.models.Post.findByIdAndUpdate(postId, { $inc: {quantityDonated: quantity}})
+    console.log(post)
+    await post.save()
+    res.json({ status: "success" })
+  } catch (e) {
+    console.log(e)
+    res.status(500).json({ status: "error", error: e })
+  }
+})
 
 router.patch('/complete', async (req, res) => {
   const postId = req.body.postID
