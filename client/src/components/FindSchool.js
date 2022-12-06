@@ -146,11 +146,13 @@ function FindSchool() {
     <>
     {/* Page options */}
       <div className="options">
-        <div>
+        <div className="filter-buttons">
           <Button variant="text" style={buttonStyle}>Sort</Button> 
           <Button variant="text" style={buttonStyle}>Filter</Button>
         </div>
-        <Button variant="text" onClick={handlePostButtonClick} style={buttonStyle}>Post</Button>
+        <div>
+          <Button variant="text" onClick={handlePostButtonClick} style={buttonStyle}>Post</Button>
+        </div> 
       </div>
 
       {/* Page posts */}

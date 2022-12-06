@@ -7,7 +7,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <Link to="/"> 
-        <img className="logo" src="../../public/img/pencil-with-wings.jpg" alt="logo" />
+        <img className="logo" src="/img/pencil-with-wings.jpg" alt="logo" />
       </Link>
       <ul>
         {/* <li>

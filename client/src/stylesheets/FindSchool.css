@@ -2,6 +2,11 @@
   display: flex; 
   justify-content: space-between; 
   padding: 0.75rem 1.25rem; 
+  width: 100vw; 
+}
+
+.filter-buttons { 
+  display: flex; 
 }
 
 .school-posts { 
