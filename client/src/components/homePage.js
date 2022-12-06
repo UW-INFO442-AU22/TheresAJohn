@@ -37,7 +37,7 @@ export function Home() {
                 <div className="float-child">
                     <div className="mainDiv">
                         <p>Are you a donor/tutor looking to help a school in need?</p>
-                        <Link className="mainButton" to={"/tutor"}>Find a School to Help</Link>
+                        <Link className="mainButton" to={"/resource"}>Find a School to Help</Link>
                     </div>
                 </div>
                 <div className="float-child">

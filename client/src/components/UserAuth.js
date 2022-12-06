@@ -25,7 +25,7 @@ export function UserAuthSignIn() {
                     sessionStorage.setItem("fullName", userInfo.fullName)
                     sessionStorage.setItem("email", userInfo.email)
                     sessionStorage.setItem("schoolName", userInfo.schoolName)
-                    window.location.href = "/tutor"
+                    window.location.href = "/resource"
                 }
             });
     }
