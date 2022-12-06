@@ -36,14 +36,11 @@ function FindSchool() {
     fetch("/api/posts")
     .then(response => response.json())
     .then(jsonData => {
+      console.log(jsonData); 
       // Mapping data into Post components
       let posts = jsonData.map(postObject => { 
-        return <SchoolPost 
-        key={postObject._id} 
-        postData={postObject} 
-        togglePopup={toggleSchoolPopup} 
-        setTogglePopup={setToggleSchoolPopup} 
-        setSelectedPostData={setSelectedPostData} />
+        console.log(postObject); 
+        return <SchoolPost key={postObject.id} postData={postObject} togglePopup={toggleSchoolPopup} setTogglePopup={setToggleSchoolPopup} setSelectedPostData={setSelectedPostData} />
       });
       setSchoolPosts(posts);
     }); 
@@ -108,7 +105,7 @@ function FindSchool() {
       .then(jsonData => {
         // Mapping data into Post components
         let posts = jsonData.map(postObject => { 
-          return <SchoolPost key={postObject._id} postData={postObject} togglePopup={toggleSchoolPopup} setTogglePopup={setToggleSchoolPopup} setSelectedPostData={setSelectedPostData} />
+          return <SchoolPost key={postObject.id} postData={postObject} togglePopup={toggleSchoolPopup} setTogglePopup={setToggleSchoolPopup} setSelectedPostData={setSelectedPostData} />
         });
         setSchoolPosts(posts);
       }); 
@@ -155,7 +152,13 @@ function FindSchool() {
       <SchoolPopup content={
         <div className="content">
           <div className="post-info">
-            <img className="info-item post-image" src="img/renton-park-elementary.jpg" alt="renton park elementary" /> 
+            <img className="info-item post-image" src={selectedPostData.schoolImage.src} alt={selectedPostData.schoolImage.alt} /> 
+            <p className="info-item">
+              <strong>
+                School Name: 
+              </strong> 
+              {selectedPostData.schoolName}
+            </p>
             <p className="info-item">
               <strong>
                 Contact: 
@@ -167,12 +170,6 @@ function FindSchool() {
                 Resource: 
               </strong>
               {selectedPostData.resource}
-            </p>
-            <p className="info-item">
-              <strong>
-                Description:
-              </strong>
-              {selectedPostData.description}
             </p>
             <p className="info-item">
               <strong>

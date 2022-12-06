@@ -15,7 +15,7 @@ export function SchoolPost(props) {
 
   return (
     <div className="post" >
-      <img className="post-image" src="img/renton-park-elementary.jpg" alt="renton park elementary" />
+      <img className="post-image" src={props.postData.schoolImage.src} alt={props.postData.schoolImage.alt} />
       <div className="post-description">
         <Button size="large" variant="text" onClick={() => { openSchoolWebsite(props.postData.schoolLink) }}><strong>{props.postData.schoolName}</strong></Button>
         <p><strong>Resource: </strong>{props.postData.resource}</p>
