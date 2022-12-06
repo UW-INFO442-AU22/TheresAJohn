@@ -1,13 +1,28 @@
 import React from "react"
-import {CreateHomePage} from '../homePage'
+import { Routes, Route } from "react-router-dom"
+import { CreateHome } from './homePage'
+import FindSchool from "./FindSchool"; 
+import Navbar from "./../widgets/Navbar";
+import {UserAuthSignIn, UserAuthRegister} from "./UserAuth.js" 
+import { Footer } from "./../widgets/Footer";
+
+import './../stylesheets/App.css'
 
 function App() {
 
   return (
     <div className="App">
       <header className="App-header">
+        <Navbar />
       </header>
-      <CreateHomePage />
+      <Routes>
+        <Route path="/" element={<CreateHome />} />
+        <Route path="tutor" exact={true} element={<FindSchool />} />
+        <Route path="signin" element={<UserAuthSignIn />} />
+        <Route path="register" element={<UserAuthRegister />} />
+      </Routes>
+      
+      <Footer />
     </div>
   );
 }

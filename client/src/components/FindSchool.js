@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import LinearProgress from "@mui/material/LinearProgress";
-import { SchoolPost } from "./../widgets/Post.js"; 
+import { MediaCard } from "./../widgets/Post.js"; 
 import { SchoolPopup, PostPopup } from "./../widgets/Popup.js"; 
 import "../stylesheets/FindSchool.css"; 
 import "../stylesheets/Popup.css"; 
@@ -12,27 +12,13 @@ function FindSchool() {
   const [togglePostPopup, setTogglePostPopup] = useState(false);  
   const [selectedPostData, setSelectedPostData] = useState({});
   const [schoolPosts, setSchoolPosts] = useState([]);
+  const [invalidFields, setInvalidFields] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
   
-  const schoolName = useRef("");
-  const contact = useRef(""); 
-  const email = useRef(""); 
   const website = useRef(""); 
   const resource = useRef(""); 
   const quantity = useRef(1); 
   const description = useRef(""); 
-
-  useEffect(() => {
-    // Fetching posts data
-    fetch("/api/posts")
-    .then(response => response.json())
-    .then(jsonData => {
-      // Mapping data into Post components
-      let posts = jsonData.map(postObject => { 
-        return <SchoolPost key={postObject._id} postData={postObject} togglePopup={toggleSchoolPopup} setTogglePopup={setToggleSchoolPopup} setSelectedPostData={setSelectedPostData} />
-      });
-      setSchoolPosts(posts);
-    }); 
-  }, [])
 
   // Button style
   const buttonStyle = {
@@ -45,70 +31,126 @@ function FindSchool() {
     padding: "1rem"
   }
 
-  // Handle info submissions
-  const handlePostSubmit = (event) => { 
-    event.preventDefault(); 
-    // Sending post endpoint all post input values
-    fetch("/api/posts", 
-    {
-      method: "POST", 
-      body: JSON.stringify({
-        schoolName: schoolName.current.value, 
-        contact: contact.current.value, 
-        email: email.current.value, 
-        link: website.current.value, 
-        resource: resource.current.value, 
-        quantity: quantity.current.value,
-        description: description.current.value
-      }), 
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-
-    console.log(schoolName.current.value); 
-
-    setTogglePostPopup(false); 
-
-    // Refetching all posts after update
+  useEffect(() => {
+    // Fetching posts data
     fetch("/api/posts")
     .then(response => response.json())
     .then(jsonData => {
       // Mapping data into Post components
       let posts = jsonData.map(postObject => { 
-        return <SchoolPost key={postObject._id} postData={postObject} togglePopup={toggleSchoolPopup} setTogglePopup={setToggleSchoolPopup} setSelectedPostData={setSelectedPostData} />
+        return (
+        <MediaCard 
+          key={postObject.id} 
+          postData={postObject} 
+          togglePopup={toggleSchoolPopup} 
+          setTogglePopup={setToggleSchoolPopup} 
+          setSelectedPostData={setSelectedPostData} />
+        ) 
+      
       });
       setSchoolPosts(posts);
     }); 
+  }, [])
 
-    // Resetting input field values
-    schoolName.current.value = ""; 
-    contact.current.value = ""; 
-    email.current.value = ""; 
-    resource.current.value = ""; 
-    website.current.value = ""; 
-    description.current.value = "";
-    quantity.current.value = 1; 
+  // Check if inputs from user are valid
+  function validInputs() { 
+    let validInput = true;
+    if (website.current.value === "") { 
+      invalidFields.push("School Website"); 
+      validInput = false; 
+    }
+    if (resource.current.value === "") { 
+      invalidFields.push("Resource"); 
+      validInput = false; 
+    }
+    if (quantity.current.value <= 0) { 
+      invalidFields.push("Quantity"); 
+      validInput = false; 
+      // to get info about logged in user
+      const LoggedInUser = sessionStorage.getItem("email")
+      console.log(LoggedInUser); 
+    }
+    if (description.current.value === "") { 
+      invalidFields.push("Description"); 
+      validInput = false; 
+    }
+    setInvalidFields([...invalidFields]);
+    console.log(invalidFields);  
+    return validInput; 
   }
 
-  // Handle clicks made on post button
-  const handlePostButtonClick = (event) => { 
+  // Handle info submissions
+  const handlePostSubmit = (event) => { 
     event.preventDefault(); 
-    setTogglePostPopup(!togglePostPopup); 
-  }
 
-  // to get info about logged in user
-  // const LoggedInUser = sessionStorage.getItem("email")
+    // Checking for any empty input fields
+    if (!validInputs()) { 
+      setErrorMessage("Please fill out all the following fields with the proper values before submitting: \n\n" + [...invalidFields].join(", "));
+      return; 
+    } else { 
+      // Sending post endpoint all post input values
+      fetch("/api/posts", 
+      {
+        method: "POST", 
+        body: JSON.stringify({
+          link: website.current.value, 
+          resource: resource.current.value, 
+          quantity: quantity.current.value,
+          description: description.current.value
+        }), 
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      
+      setTogglePostPopup(false); 
+      
+      // Refetching all posts after update
+      fetch("/api/posts")
+      .then(response => response.json())
+      .then(jsonData => {
+        // Mapping data into Post components
+        let posts = jsonData.map(postObject => { 
+          return (
+          <MediaCard 
+            key={postObject.id} 
+            postData={postObject} 
+            togglePopup={toggleSchoolPopup} 
+            setTogglePopup={setToggleSchoolPopup} 
+            setSelectedPostData={setSelectedPostData} />
+          ) 
+        });
+        setSchoolPosts(posts);
+      }); 
+      
+      // Resetting input field values
+      resource.current.value = ""; 
+      website.current.value = ""; 
+      description.current.value = "";
+      quantity.current.value = 1; 
+      setInvalidFields([]); 
+      setErrorMessage("");
+    }
+  }
+    
+    // Handle clicks made on post button
+    const handlePostButtonClick = (event) => { 
+      event.preventDefault(); 
+      setTogglePostPopup(!togglePostPopup); 
+    }
+    
 
   return(
     <>
     {/* Page options */}
       <div className="options">
-        <div>
+        <div className="filter-buttons">
           <Button variant="text" style={buttonStyle}>Sort</Button> 
           <Button variant="text" style={buttonStyle}>Filter</Button>
         </div>
-        <Button variant="text" onClick={handlePostButtonClick} style={buttonStyle}>Post</Button>
+        <div>
+          <Button variant="text" onClick={handlePostButtonClick} style={buttonStyle}>Post</Button>
+        </div> 
       </div>
 
       {/* Page posts */}
@@ -123,11 +165,12 @@ function FindSchool() {
       <SchoolPopup content={
         <div className="content">
           <div className="post-info">
-            <img className="info-item post-image" src="img/renton-park-elementary.jpg" alt="renton park elementary" /> 
+            <img className="info-item post-image" src={selectedPostData.schoolImage.src} alt={selectedPostData.schoolImage.alt} /> 
             <p className="info-item">
               <strong>
-                {selectedPostData.schoolName}
-              </strong>
+                School Name: 
+              </strong> 
+              {selectedPostData.schoolName}
             </p>
             <p className="info-item">
               <strong>
@@ -137,21 +180,9 @@ function FindSchool() {
             </p>
             <p className="info-item">
               <strong>
-                Contact-Email: 
-              </strong>
-              {selectedPostData.contactEmail}
-            </p>
-            <p className="info-item">
-              <strong>
                 Resource: 
               </strong>
               {selectedPostData.resource}
-            </p>
-            <p className="info-item">
-              <strong>
-                Description:
-              </strong>
-              {selectedPostData.description}
             </p>
             <p className="info-item">
               <strong>
@@ -210,27 +241,6 @@ function FindSchool() {
             <div className="input-info">
               <TextField style={textFieldStyle}
                 required
-                inputRef={schoolName}
-                id="outlined-required"
-                label="School Name"
-                type="text"
-              />
-              <TextField style={textFieldStyle}
-                required
-                inputRef={contact}
-                id="outlined-required"
-                label="Contact Person"
-                type="text"
-              />
-              <TextField style={textFieldStyle}
-                required
-                inputRef={email}
-                id="outlined-required"
-                label="Email"
-                type="text"
-              />
-              <TextField style={textFieldStyle}
-                required
                 inputRef={website}
                 id="outlined-required"
                 label="School Website"
@@ -249,6 +259,7 @@ function FindSchool() {
                 id="outlined-required"
                 label="Quantity Needed"
                 type="number"
+                inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
               />
               <TextField style={textFieldStyle}
                 required
@@ -258,7 +269,10 @@ function FindSchool() {
                 type="text"
               />
             </div>
-            <Button variant="text" onClick={handlePostSubmit}>Submit</Button>
+            <p style={{color: "red"}}>{errorMessage}</p>
+            <Button variant="text" onClick={handlePostSubmit}>
+              Submit
+            </Button>
           </>
         } 
         handleClose={handlePostButtonClick}
