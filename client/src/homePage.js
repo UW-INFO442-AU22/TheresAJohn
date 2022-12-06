@@ -15,7 +15,7 @@ export function CreateHomePage() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<CreateHome />} />
-                <Route path="tutor" exact={true} element={<FindSchool />} />
+                <Route path="resource" exact={true} element={<FindSchool />} />
                 <Route path="signin" element={<UserAuthSignIn />} />
                 <Route path="register" element={<UserAuthRegister />} />
             </Routes>
