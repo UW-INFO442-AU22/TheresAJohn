@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import LinearProgress from "@mui/material/LinearProgress";
 import { MediaCard } from "./../widgets/Post.js";
-import { SchoolPopup, PostPopup } from "./../widgets/Popup.js";
+import { Popup } from "./../widgets/Popup.js";
 import "../stylesheets/FindSchool.css";
 import "../stylesheets/Popup.css";
 
@@ -168,7 +168,7 @@ function FindSchool() {
 
       {/* Toggle popup for the post that was clicked on */}
       {toggleSchoolPopup &&
-      <SchoolPopup content={
+      <Popup content={
         <div className="content">
           <div className="post-info">
             <img className="info-item post-image" src={selectedPostData.schoolImage.src} alt={selectedPostData.schoolImage.alt} />
@@ -242,7 +242,7 @@ function FindSchool() {
 
 
       {togglePostPopup &&
-      <PostPopup
+      <Popup
         content={
           <>
             <h3>Please fill out and submit this form</h3>
@@ -286,6 +286,8 @@ function FindSchool() {
         handleClose={handlePostButtonClick}
       />
       }
+
+
     </>
   );
 }
