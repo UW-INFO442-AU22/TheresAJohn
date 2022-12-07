@@ -14,8 +14,6 @@ function App() {
   useEffect(() => {
     let status = (sessionStorage.getItem("email")) ? true : false; 
     setLoginStatus(status); 
-    console.log(sessionStorage); 
-    console.log("Login status on App", loginStatus); 
   }, []);
 
   return (

@@ -9,7 +9,6 @@ function Navbar(props) {
   
   const handleStatusClick = () => { 
     if (!props.loginStatus) {
-      console.log("This is navbar status", props.loginStatus); 
       navigate("/signin");
     } else {
       props.setLoginStatus(false); 
@@ -17,8 +16,6 @@ function Navbar(props) {
       navigate("/");
     }
   }
-
-  console.log("This is navbar status on line 20", props.loginStatus); 
 
   return (
     <nav className="navbar">

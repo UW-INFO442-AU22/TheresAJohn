@@ -14,11 +14,13 @@ function FindSchool() {
   const [schoolPosts, setSchoolPosts] = useState([]);
   const [invalidFields, setInvalidFields] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
-
+  
   const website = useRef("");
   const resource = useRef("");
   const quantity = useRef(1);
   const description = useRef("");
+  
+  const page = window.location.href.substring(window.location.href.lastIndexOf("/") + 1); 
 
   // Button style
   const buttonStyle = {
@@ -42,6 +44,7 @@ function FindSchool() {
         <MediaCard
           key={postObject.id}
           postData={postObject}
+          page={page}
           togglePopup={toggleSchoolPopup}
           setTogglePopup={setToggleSchoolPopup}
           setSelectedPostData={setSelectedPostData} />
@@ -139,7 +142,6 @@ function FindSchool() {
     setTogglePostPopup(!togglePostPopup);
   }
 
-  let page = window.location.href.substring(window.location.href.lastIndexOf("/") + 1); 
 
   return(
     <>

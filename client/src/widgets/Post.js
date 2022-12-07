@@ -34,11 +34,16 @@ export function SchoolPost(props) {
 }
 
 export function MediaCard(props) {
+  console.log(props); 
 
   const handlePostClick = (event) => {
     event.preventDefault(); 
     props.setSelectedPostData(props.postData);
     props.setTogglePopup(!props.togglePopup);
+  }
+
+  const handleDonateClick = (event) => { 
+    console.log("I have been donate");
   }
 
   return (
@@ -58,6 +63,7 @@ export function MediaCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
+        <Button size="small" onClick={handleDonateClick} sx={props.page==="donor"? {display: "block"} : {display: "none"}}>Donate</Button>
         <Button size="small" onClick={handlePostClick}>Learn More</Button>
       </CardActions>
     </Card>
