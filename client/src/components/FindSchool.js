@@ -50,7 +50,7 @@ function FindSchool() {
       });
       setSchoolPosts(posts);
     });
-  }, [])
+  }, [toggleSchoolPopup])
 
   // Check if inputs from user are valid
   function validInputs() {
@@ -133,12 +133,13 @@ function FindSchool() {
     }
   }
 
-    // Handle clicks made on post button
-    const handlePostButtonClick = (event) => {
-      event.preventDefault();
-      setTogglePostPopup(!togglePostPopup);
-    }
+  // Handle clicks made on post button
+  const handlePostButtonClick = (event) => {
+    event.preventDefault();
+    setTogglePostPopup(!togglePostPopup);
+  }
 
+  let page = window.location.href.substring(window.location.href.lastIndexOf("/") + 1); 
 
   return(
     <>
@@ -149,7 +150,7 @@ function FindSchool() {
           <Button variant="text" style={buttonStyle}>Filter</Button>
         </div>
         <div>
-          <Button variant="text" onClick={handlePostButtonClick} style={buttonStyle}>Post</Button>
+          <Button variant="text" onClick={handlePostButtonClick} style={ (page === "school") ? buttonStyle : {display: "none"}}>Post</Button>
         </div>
       </div>
 

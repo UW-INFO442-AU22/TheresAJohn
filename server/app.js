@@ -95,7 +95,7 @@ app.post('/signin', async (req, res) => {
 
 app.get('/signout', async (req, res) => {
   req.session.destroy()
-  res.redirect('/')
+  // res.redirect("/")
 })
 
 app.get('/error', (req, res) => res.status(500).json({ status: 'error', error: "Server Error" }))
