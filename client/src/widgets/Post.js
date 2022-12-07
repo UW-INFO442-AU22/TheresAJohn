@@ -44,6 +44,9 @@ export function MediaCard(props) {
 
   const handleDonateClick = (event) => { 
     console.log("I have been donate");
+    event.preventDefault(); 
+    props.setSelectedPostData(props.postData); 
+    props.setToggleDonationPopup(!props.toggleDonationPopup);
   }
 
   return (

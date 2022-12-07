@@ -10,6 +10,7 @@ import "../stylesheets/Popup.css";
 function FindSchool() {
   const [toggleSchoolPopup, setToggleSchoolPopup] = useState(false);
   const [togglePostPopup, setTogglePostPopup] = useState(false);
+  const [toggleDonationPopup, setToggleDonationPopup] = useState(false); 
   const [selectedPostData, setSelectedPostData] = useState({});
   const [schoolPosts, setSchoolPosts] = useState([]);
   const [invalidFields, setInvalidFields] = useState([]);
@@ -45,6 +46,8 @@ function FindSchool() {
           key={postObject.id}
           postData={postObject}
           page={page}
+          toggleDonationPopup={toggleDonationPopup}
+          setToggleDonationPopup={setToggleDonationPopup}
           togglePopup={toggleSchoolPopup}
           setTogglePopup={setToggleSchoolPopup}
           setSelectedPostData={setSelectedPostData} />
