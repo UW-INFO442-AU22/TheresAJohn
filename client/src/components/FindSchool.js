@@ -150,7 +150,7 @@ function FindSchool() {
           <Button variant="text" style={buttonStyle}>Filter</Button>
         </div>
         <div>
-          <Button variant="text" onClick={handlePostButtonClick} style={ (page == "school") ? buttonStyle : {display: "none"}}>Post</Button>
+          <Button variant="text" onClick={handlePostButtonClick} style={ (page === "school") ? buttonStyle : {display: "none"}}>Post</Button>
         </div>
       </div>
 

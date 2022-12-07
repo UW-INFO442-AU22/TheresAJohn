@@ -15,13 +15,13 @@ function App() {
     let status = (sessionStorage.getItem("email")) ? true : false; 
     setLoginStatus(status); 
     console.log(sessionStorage); 
-    console.log(loginStatus); 
-  });
+    console.log("Login status on App", loginStatus); 
+  }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-        <Navbar />
+        <Navbar loginStatus={loginStatus} setLoginStatus={setLoginStatus} />
       </header>
       <Routes>
         <Route path="/" element={<Home loginStatus={loginStatus} />} />
@@ -29,6 +29,7 @@ function App() {
         <Route path="donor" exact={true} element={<FindSchool />} />
         <Route path="signin" element={<UserAuthSignIn />} />
         <Route path="register" element={<UserAuthRegister />} />
+        <Route path="*" element={<Home loginStatus={loginStatus} />} />
       </Routes>
 
       <Footer />
