@@ -20,6 +20,7 @@ function FindSchool() {
   const resource = useRef("");
   const quantity = useRef(1);
   const description = useRef("");
+  const donatedQuantity = useRef(0);
   
   const page = window.location.href.substring(window.location.href.lastIndexOf("/") + 1); 
 
@@ -56,7 +57,7 @@ function FindSchool() {
       });
       setSchoolPosts(posts);
     });
-  }, [toggleSchoolPopup])
+  }, [])
 
   // Check if inputs from user are valid
   function validInputs() {
@@ -86,7 +87,7 @@ function FindSchool() {
   }
 
   // Handle info submissions
-  const handlePostSubmit = (event) => {
+  const handlePostSubmit = async (event) => {
     event.preventDefault();
 
     // Checking for any empty input fields
@@ -95,7 +96,7 @@ function FindSchool() {
       return;
     } else {
       // Sending post endpoint all post input values
-      fetch("/api/posts",
+      await fetch("/api/posts",
       {
         method: "POST",
         body: JSON.stringify({
@@ -112,7 +113,7 @@ function FindSchool() {
       setTogglePostPopup(false);
 
       // Refetching all posts after update
-      fetch("/api/posts")
+      await fetch("/api/posts")
       .then(response => response.json())
       .then(jsonData => {
         // Mapping data into Post components
@@ -121,10 +122,14 @@ function FindSchool() {
           <MediaCard
             key={postObject.id}
             postData={postObject}
+            page={page}
+            toggleDonationPopup={toggleDonationPopup}
+            setToggleDonationPopup={setToggleDonationPopup}
             togglePopup={toggleSchoolPopup}
             setTogglePopup={setToggleSchoolPopup}
             setSelectedPostData={setSelectedPostData} />
           )
+  
         });
         setSchoolPosts(posts);
       });
@@ -145,6 +150,45 @@ function FindSchool() {
     setTogglePostPopup(!togglePostPopup);
   }
 
+  const handleDonationSubmit = async (event) => { 
+    console.log(selectedPostData.id); 
+    console.log(donatedQuantity.current.value); 
+    // Updating donated quantity
+    await fetch("api/posts/donate", { 
+      method: "PATCH", 
+      body: JSON.stringify({
+        postID: selectedPostData.id, 
+        quantityDonated: donatedQuantity.current.value
+      }), 
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    setToggleDonationPopup(false); 
+    
+    // Refetching data after updating
+    await fetch("/api/posts")
+    .then(response => response.json())
+    .then(jsonData => {
+      // Mapping data into Post components
+      let posts = jsonData.map(postObject => {
+        return (
+        <MediaCard
+          key={postObject.id}
+          postData={postObject}
+          page={page}
+          toggleDonationPopup={toggleDonationPopup}
+          setToggleDonationPopup={setToggleDonationPopup}
+          togglePopup={toggleSchoolPopup}
+          setTogglePopup={setToggleSchoolPopup}
+          setSelectedPostData={setSelectedPostData} />
+        )
+      });
+    setSchoolPosts(posts);
+    });
+
+  }
 
   return(
     <>
@@ -287,6 +331,31 @@ function FindSchool() {
       />
       }
 
+      {toggleDonationPopup &&
+      <Popup
+        content={
+          <>
+            <p>How much would you like to donate?</p>
+            <TextField style={textFieldStyle}
+              required
+              inputRef={donatedQuantity}
+              id="outlined-required"
+              label="Quantity Donated"
+              type="number"
+              inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+            />
+            <Button variant="text" onClick={handleDonationSubmit}>
+              Donate 
+            </Button>
+          </>
+        }
+        handleClose={
+          () => {
+            setToggleDonationPopup(!toggleDonationPopup);
+          }
+        }
+      />
+      }
 
     </>
   );
