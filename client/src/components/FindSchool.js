@@ -26,10 +26,10 @@ function FindSchool() {
   }
 
   // Text Field style
-  const textFieldStyle = {
-    width: "45%",
-    padding: "1rem"
-  }
+  // const textFieldStyle = {
+  //   width: "45%",
+  //   padding: "1rem"
+  // }
 
   useEffect(() => {
     // Fetching posts data
@@ -156,8 +156,6 @@ function FindSchool() {
 
       {/* Page posts */}
       <section className="school-posts" aria-labelledby="school posts">
-        {/* Test div for logged in user info */}
-        {/* <div>Name: {LoggedInUser}</div> */}
         {schoolPosts}
       </section>
 
@@ -169,49 +167,49 @@ function FindSchool() {
             <img className="info-item post-image" src={selectedPostData.schoolImage.src} alt={selectedPostData.schoolImage.alt} />
             <p className="info-item">
               <strong>
-                School Name:
+                School Name: 
               </strong>
               <a href={selectedPostData.schoolLink} target="_blank" rel="noreferrer">{selectedPostData.schoolName}</a>
             </p>
             <p className="info-item">
               <strong>
-                Contact:
+                Contact: 
               </strong>
               {selectedPostData.personOfContact}
             </p>
             <p className="info-item">
               <strong>
-                Email:
+                Email: 
               </strong>
               {selectedPostData.contactEmail}
             </p>
             <p className="info-item">
               <strong>
-                Resource:
+                Resource: 
               </strong>
               {selectedPostData.resource}
             </p>
             <p className="info-item">
               <strong>
-                Posted:
+                Posted: 
               </strong>
               {selectedPostData.datePosted}
             </p>
             <p className="info-item">
               <strong>
-                Status:
+                Status: 
               </strong>
               {selectedPostData.completed ? "Completed" : "In-Progress"}
             </p>
             <p className="info-item">
               <strong>
-                Quantity Requested:
+                Quantity Requested: 
               </strong>
               {selectedPostData.quantity}
             </p>
             <p className="info-item">
               <strong>
-                Quantity Donated:
+                Quantity Donated: 
               </strong>
               {selectedPostData.quantityDonated}
             </p>
@@ -242,21 +240,23 @@ function FindSchool() {
           <>
             <h3>Please fill out and submit this form</h3>
             <div className="input-info">
-              <TextField style={textFieldStyle}
+              <TextField className="input-item-school"
                 required
                 inputRef={website}
                 id="outlined-required"
                 label="School Website"
                 type="text"
               />
-              <TextField style={textFieldStyle}
+              <br></br>
+              <TextField className="input-item-school"
                 required
                 inputRef={resource}
                 id="outlined-required"
                 label="Needed Resource"
                 type="text"
               />
-              <TextField style={textFieldStyle}
+              <br></br>
+              <TextField className="input-item-school"
                 required
                 inputRef={quantity}
                 id="outlined-required"
@@ -264,7 +264,8 @@ function FindSchool() {
                 type="number"
                 inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
               />
-              <TextField style={textFieldStyle}
+              <br></br>
+              <TextField className="input-item-school"
                 required
                 inputRef={description}
                 id="outlined-required"
