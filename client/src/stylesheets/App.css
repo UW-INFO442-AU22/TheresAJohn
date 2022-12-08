@@ -5,7 +5,8 @@
 }
 
 /* landing page */
-html, body {
+html,
+body {
   margin: 0;
   height: 100%;
 }
@@ -26,6 +27,11 @@ html, body {
   padding-bottom: 7.5%;
   position: relative;
 }
+
+.hero-text h1 {
+  font-size: 40px;
+}
+
 .hero-text p {
   font-size: 20px;
 }
@@ -52,6 +58,7 @@ html, body {
 }
 
 .mainDiv p {
+  font-size: 20px;
   padding: 10px;
 }
 
@@ -76,89 +83,61 @@ footer {
   margin-top: auto;
   position: fixed;
   bottom: 0;
+  padding: 10px 0px 0px 10px;
   color: rgb(68, 54, 54);
 }
 
+@media (max-width: 480px) {
+  .hero-text h1 {
+    font-size: 30px;
+  }
 
-.flexbox-single-anime {
-  display: flex;
-  /* align-items: center; */
-  background-color: white;
-  top: 10%;
-  left: 10%;
-  right: 10%;
-  position: absolute;
+  .hero-text p {
+    font-size: 20px;
+  }
 
-}
+  .float-container {
+    flex-direction: column;
+    height: 350px;
+  }
 
-.discription-container {
-  text-align: center;
-}
+  .float-child {
+    width: 100%;
+    padding: 10px 0px;
+    height: 80%;
+  }
 
-/* description card */
-.discription-container-title {
-  border-radius: 10px;
-  margin: 2% 5% 1% 5%;
-}
+  .mainDiv p {
+    font-size: 18px;
+    padding: 5px;
+    padding-bottom: 20px;
+  }
 
-/* school title in description card */
-.anime-title {
-  background-color: bisque;
-  padding: 20px;
-  text-align: center;
-  font-family: 'Lobster', cursive;
-  border-radius: 10px 10px 0 0;
-}
+  .mainButton-home {
+    font-size: 18px;
+    padding: 15px;
+  }
 
-/* school details in description card */
-.discription-text {
-  margin-left: 5%;
-  margin-right: 3%;
-  font-family: 'Goudy Bookletter 1911', serif;
-}
-
-/* school picture */
-.poster {
-  max-width: 370px;
-  height: 330px;
-  border: 5px solid white;
-}
-
-
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  footer {
+    display: none;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media (min-width: 481px) and (max-width: 768px) {
+  .float-container {
+    flex-direction: column;
+    height: 60%;
   }
-  to {
-    transform: rotate(360deg);
+
+  .float-child {
+    width: 100%;
+    padding: 10px 0px;
+    height: 50%;
   }
-} */
+
+  .mainDiv p {
+    font-size: 30px;
+    padding: 5px;
+    padding-bottom: 20px;
+  }
+}
