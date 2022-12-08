@@ -27,14 +27,8 @@ function Navbar(props) {
       </Link>
       <ul>
         <li>
-          <Button onClick={handleStatusClick} variant="text" size="large" sx={{color: "white"}}>{props.loginStatus ? "Logout" : "Login"}</Button>
+          <Button onClick={handleStatusClick} variant="text" size="large" sx={{color: "white"}}>{props.loginStatus ? "Sign out" : "Sign in"}</Button>
         </li>
-        {/* <li>
-          <Button variant="text" size="large" style={{color: "white"}}>Find A Tutor</Button>
-        </li>
-        <li>
-          <Button variant="text" size="large" style={{ color: "white" }}>Find A School</Button>
-        </li> */}
       </ul>
     </nav>
   );

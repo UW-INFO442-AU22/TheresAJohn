@@ -1,6 +1,6 @@
 .post { 
   margin: 1rem; 
-  padding: .5rem; 
+  padding: .5rem;
   border: 2px solid lightgray; 
   min-width: 20vw; 
 }
@@ -12,7 +12,6 @@
   margin-bottom: .5rem; 
   border: 1.5px solid black; 
 }
-
 
 .link { 
   text-decoration: none; 
