@@ -11,7 +11,7 @@ import "../stylesheets/Post.css";
 export function SchoolPost(props) {
 
   const handlePostClick = (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
     props.setSelectedPostData(props.postData);
     props.setTogglePopup(!props.togglePopup);
   }
@@ -24,10 +24,10 @@ export function SchoolPost(props) {
     <div className="post">
       <img className="post-image" src={props.postData.schoolImage.src} alt={props.postData.schoolImage.alt} />
       <div className="post-description">
-        <Button size="large" variant="text" onClick={() => { openSchoolWebsite(props.postData.schoolLink) }}><strong>{props.postData.schoolName}</strong></Button>
+        <Button type="button" size="large" variant="text" onClick={() => { openSchoolWebsite(props.postData.schoolLink) }}><strong>{props.postData.schoolName}</strong></Button>
         <p><strong>Resource: </strong>{props.postData.resource}</p>
         <p><strong>Posted: </strong>{props.postData.datePosted}</p>
-        <Button size="small" style={{ float: "right" }} variant="text" onClick={handlePostClick}>Details</Button>
+        <Button type="button" size="small" style={{ float: "right" }} variant="text" onClick={handlePostClick}>Details</Button>
       </div>
     </div>
   );
@@ -36,7 +36,7 @@ export function SchoolPost(props) {
 export function MediaCard(props) {
 
   const handlePostClick = (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
     props.setSelectedPostData(props.postData);
     props.setTogglePopup(!props.togglePopup);
   }
@@ -58,7 +58,7 @@ export function MediaCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={handlePostClick}>Learn More</Button>
+        <Button type="button" size="small" onClick={handlePostClick}>Learn More</Button>
       </CardActions>
     </Card>
   );

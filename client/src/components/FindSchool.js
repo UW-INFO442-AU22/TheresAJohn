@@ -139,18 +139,18 @@ function FindSchool() {
     setTogglePostPopup(!togglePostPopup);
   }
 
-  let page = window.location.href.substring(window.location.href.lastIndexOf("/") + 1); 
+  let page = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
 
   return(
     <>
     {/* Page options */}
       <div className="options">
         <div className="filter-buttons">
-          <Button variant="text" style={buttonStyle}>Sort</Button>
-          <Button variant="text" style={buttonStyle}>Filter</Button>
+          <Button type="button" variant="text" style={buttonStyle}>Sort</Button>
+          <Button type="button" variant="text" style={buttonStyle}>Filter</Button>
         </div>
         <div>
-          <Button variant="text" onClick={handlePostButtonClick} style={ (page === "school") ? buttonStyle : {display: "none"}}>Post</Button>
+          <Button type="button" variant="text" onClick={handlePostButtonClick} style={ (page === "school") ? buttonStyle : {display: "none"}}>Post</Button>
         </div>
       </div>
 
@@ -246,6 +246,8 @@ function FindSchool() {
                 id="outlined-required"
                 label="School Website"
                 type="text"
+                aria-label="website"
+                aria-required="true"
               />
               <br></br>
               <TextField className="input-item-school"
@@ -254,6 +256,8 @@ function FindSchool() {
                 id="outlined-required"
                 label="Needed Resource"
                 type="text"
+                aria-label="resource"
+                aria-required="true"
               />
               <br></br>
               <TextField className="input-item-school"
@@ -262,6 +266,8 @@ function FindSchool() {
                 id="outlined-required"
                 label="Quantity Needed"
                 type="number"
+                aria-label="quantity"
+                aria-required="true"
                 inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
               />
               <br></br>
@@ -271,10 +277,12 @@ function FindSchool() {
                 id="outlined-required"
                 label="Description"
                 type="text"
+                aria-label="description"
+                aria-required="true"
               />
             </div>
             <p style={{color: "red"}}>{errorMessage}</p>
-            <Button variant="text" onClick={handlePostSubmit}>
+            <Button type="button" variant="text" onClick={handlePostSubmit}>
               Submit
             </Button>
           </>
