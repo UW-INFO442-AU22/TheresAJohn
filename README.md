@@ -3,17 +3,10 @@ Lei Lei, Miranda Ma, John Nguyen, Alina Wang, Jerry Wu
 
 ## Mission Statement
 
-#### SDG and general problem domain:
-The SDG we are aiming to solve is quality education. Specifically, we are targeting the
-issue of lack of resources, such as learning supplies. 
+This application aims to serve as a middleman between schools/teachers with donors so that donors can help support local schools in their needs of teaching resources. 
 
-#### How might we...
-How might we provide more teaching/learning resources for K-8 schools in rural
-areas?
-
-## Why we are building it
-We will serve as a middleman to connect schools/teachers with donors for their needs of technologies and teaching
-resources. 
+This solution addresses UN’s Sustainable Development Goal: Quality education. Lack of resources in schools hinders a student’s learning opportunities.
+ 
 
 ## What we are building
 
