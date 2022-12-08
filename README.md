@@ -34,3 +34,9 @@ resources.
 * Sort and filter tutors (adds up to display tutor page)
 * Verify school with a recognized accrediting body or Educational Service District (ESD).
 
+## Deployment Instructions
+
+### Start Localhost
+* Run `npm run build` in client folder
+* Run `npm start` in project folder
+* `Ctrl + C` to cancel
