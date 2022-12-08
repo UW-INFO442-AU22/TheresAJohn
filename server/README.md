@@ -1,10 +1,8 @@
-# TheresAJohn - Website for rural area K-8 students
+# TheresAJohn - EduStation
 
 ## Server Endpoints
 
-### / GET
-- returns "Welcome" if not logged in
-- returns "Hi <userFirstName>" if logged in
+### User Login and Sign up Endpoints
 
 #### /register POST
 - pass in body: { firstName, lastName, email, password }
@@ -30,13 +28,20 @@
 - pass in body: { userid }
 - returns { status: 'success' } if success
 
-### /api/posts
-#### /api/posts/ GET
-- returns "You've reached posts"
+### School Post Endpoints
 
-#### /api/posts/ POST
-- pass in body: { contact, link, resource, quantity, deadline, description }
+#### /api/posts GET
+- checks if user is authenticated, then uses their email to list out their posts. Otherwise, list out all school posts for donors.
+- return post info { id, personOfContact, contactEmail, schoolLink, schoolName, schoolImage, schoolVideo, resource, quantity, quantityDonated, description, completed, datePosted } if success
+
+#### /api/posts POST
+- pass in body: { link, resource, quantity, description }
 - creates post, saves in database
+- returns { status: 'success' } if success
+
+#### /api/posts/donate PATCH
+- pass in body: { postID, quantityDonated }
+- updates quantityDontated by however much the client has requested.
 - returns { status: 'success' } if success
 
 #### /api/posts/complete PATCH
@@ -45,28 +50,32 @@
 - returns { status: 'success' } if success
 
 #### /api/posts/ PATCH
-- pass in body: { resource, quantity, deadline, description, contact, link, postId }
-- patches existing post, saves in database
+- pass in body: { resource, quantity, description, contact, link, postID }
+- Updates existing post, saves in database
 - returns { status: 'success' } if success
 
-### /api/users
+### User Endpoints
+
 #### /api/users/ GET
 - pass in query parameter: ?email=
-- returns user info { _id, firstName, lastName, email, schoolName, schoolAddress } if success
+- returns user info { _id, firstName, lastName, email, schoolName } if success
 
 #### /api/users/update PATCH
 - pass in { email, schoolName, schoolAddress, firstName, lastName }
     - only email is required
-- patches existing user, saves in database
+- updates existing user, saves in database
 - returns { status: 'success' } if success
 
 
 ## Database Models
 
 ### Post
-* userID: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+* contactEmail: { type: String },
+* personOfContact: { type: String },
+* schoolLink: { type: String },
 * resource: { type: String, default: null },
 * quantity: { type: Number, default: 1 },
+* quantityDonated: { type: Number, default: 0 },
 * description: { type: String, default: null },
 * completed: { type: Boolean, default: false },
 * datePosted: { type: Date }
@@ -76,4 +85,3 @@
 * email: { type: String, unique: true }
 * password: { type: String } -- encrypted
 * schoolName: { type: String, default: null }
-* schoolAddress: { type: String, default: null }
