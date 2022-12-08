@@ -36,7 +36,7 @@ function CreateHome() {
 export function Home() {
     return (
         <main>
-            <div className="hero-image">
+            <div aria-label="home-page image" className="hero-image">
                 <div className="hero-text">
                     <h1>Welcome to EduStation</h1>
                     <p>Help make education more accessible</p>
@@ -45,14 +45,14 @@ export function Home() {
             <div className="float-container">
                 <div className="float-child">
                     <div className="mainDiv">
-                        <p>Are you a donor/tutor looking to help a school in need?</p>
+                        <h2>Are you a donor/tutor looking to help a school in need?</h2>
                         <br></br>
                         <Link className="mainButton-home" to={"/tutor"}>Find a School to Help</Link>
                     </div>
                 </div>
                 <div className="float-child">
                     <div className="mainDiv">
-                        <p>Are you a school teacher/representative in need of teaching resources?</p>
+                        <h2>Are you a school teacher/representative in need of teaching resources?</h2>
                         <br></br>
                         <Link className="mainButton-home" to={"/signin"}>Sign in to post</Link>
                     </div>
