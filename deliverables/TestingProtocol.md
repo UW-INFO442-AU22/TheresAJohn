@@ -1,0 +1,36 @@
+# Browser Testing Protocol
+
+- Functionality
+    - Register
+        - check if all fields needs to be provided
+    - Sign In
+        - check if all fields needs to be provided
+        - check if user info shows up post sign in
+        - check if redirected to /school
+    - Sign Out
+        - check if user info still shows up
+        - check if redirected to /
+    - Donor Page
+        - check if all posts show up
+        - check if able to click to see more details
+        - check if open graph info exists for school
+            - if image
+            - if school name
+            - if media
+        - check if donor is signed in 
+            - donor can update quantity donated
+    - School Page
+        - only available post sign in 
+        - check if all posts by user shows up
+        - check if school user is signed in
+- Responsiveness
+    - using developer tool on browser
+    - using mobile browser
+    - check if different screen size shows ok
+        - check for each page/pop up
+- Accessibility
+    - turn on screen reader
+    - check usability
+        - buttons and image alts read out
+- Deployment
+    - check if web app shows up on a public url

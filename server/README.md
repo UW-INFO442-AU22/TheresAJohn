@@ -72,8 +72,7 @@
 * datePosted: { type: Date }
 
 ### User
-* firstName: { type: String, default: null }
-* lastName: { type: String, default: null }
+* fullName: { type: String, default: null }
 * email: { type: String, unique: true }
 * password: { type: String } -- encrypted
 * schoolName: { type: String, default: null }

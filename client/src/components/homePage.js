@@ -2,47 +2,25 @@ import React from "react"
 import '../stylesheets/App.css'
 import { Link } from "react-router-dom"
 
-// export function CreateHomePage() {
-//     return (
-//         <BrowserRouter>
-//             <Routes>
-//                 <Route path="/" element={<CreateHome />} />
-//                 <Route path="tutor" exact={true} element={<FindSchool />} />
-//                 <Route path="signin" element={<UserAuthSignIn />} />
-//                 <Route path="register" element={<UserAuthRegister />} />
-//             </Routes>
-//         </BrowserRouter>
-//     )
-
-// }
-
-// export function CreateHome() {
-//     return (
-//         <div className="landing-page">
-//             <Home />
-//         </div>
-//     )
-// }
-
 export function Home(props) {
     return (
-        <div className="landing-page"> 
-            <div className="hero-image">
+        <div className="landing-page">
+            <div aria-label="home-page image" className="hero-image">
                 <div className="hero-text">
-                    <h1>Welcome to Rural school connect</h1>
+                    <h1>Welcome to EduStation</h1>
                     <p>Help make education more accessible</p>
                 </div>
             </div>
             <div className="float-container">
                 <div className="float-child">
                     <div className="mainDiv">
-                        <p>Are you a donor/tutor looking to help a school in need?</p>
+                        <h2>Are you a donor/tutor looking to help a school in need?</h2>
                         <Link className="mainButton" to={"/donor"}>Find a School to Help</Link>
                     </div>
                 </div>
                 <div className="float-child">
                     <div className="mainDiv">
-                        <p>Are you a school teacher/representative in need of teaching resources?</p>
+                        <h2>Are you a school teacher/representative in need of teaching resources?</h2>
                         <Link className="mainButton" to={ !props.loginStatus ? "/signin" : "/school"}>Request Resources</Link>
                     </div>
                 </div>

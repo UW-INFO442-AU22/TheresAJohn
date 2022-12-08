@@ -3,11 +3,17 @@ import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import sessions from 'express-session'
 import bcrypt from 'bcrypt'
+import path from 'path'
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 import models from "./db/models.js"
 import apiRouter from './api.js'
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 8080
 
 const app = express()
 
@@ -29,14 +35,9 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use('/api', apiRouter)
+app.use(express.static(path.resolve(__dirname, "../client/build")))
 
-app.get('/', (req, res) => {
-  if (req.session.isAuthenticated) {
-    return res.send("Hi " + req.session.account.fullName)
-  }
-  return res.send('Welcome!')
-})
+app.use('/api', apiRouter)
 
 app.post('/register', async (req, res) => {
   try {
@@ -95,7 +96,6 @@ app.post('/signin', async (req, res) => {
 
 app.get('/signout', async (req, res) => {
   req.session.destroy()
-  // res.redirect("/")
 })
 
 app.get('/error', (req, res) => res.status(500).json({ status: 'error', error: "Server Error" }))
@@ -119,6 +119,10 @@ app.delete('/delete', async (req, res) => {
   } catch {
     return res.status(500).json({ status: 'error', error: "cannot complete this action right now, please try again" })
   }
+})
+
+app.use('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/build", 'index.html'))
 })
 
 app.listen(PORT, () => {
