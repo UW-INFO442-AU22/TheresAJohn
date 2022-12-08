@@ -4,8 +4,8 @@ import { Link } from "react-router-dom"
 
 export function Home(props) {
     return (
-        <div className="landing-page"> 
-            <div className="hero-image">
+        <div className="landing-page">
+            <div aria-label="home-page image" className="hero-image">
                 <div className="hero-text">
                     <h1>Welcome to EduStation</h1>
                     <p>Help make education more accessible</p>
@@ -14,16 +14,14 @@ export function Home(props) {
             <div className="float-container">
                 <div className="float-child">
                     <div className="mainDiv">
-                        <p>Are you a donor or tutor looking to help a school in need?</p>
-                        <br></br>
-                        <Link className="mainButton-home" to={"/donor"}>Find a School to Help</Link>
+                        <h2>Are you a donor/tutor looking to help a school in need?</h2>
+                        <Link className="mainButton" to={"/donor"}>Find a School to Help</Link>
                     </div>
                 </div>
                 <div className="float-child">
                     <div className="mainDiv">
-                        <p>Are you a school teacher or representative in need of teaching resources?</p>
-                        <br></br>
-                        <Link className="mainButton-home" to={"/signin"}>Sign in to post</Link>
+                        <h2>Are you a school teacher/representative in need of teaching resources?</h2>
+                        <Link className="mainButton" to={ !props.loginStatus ? "/signin" : "/school"}>Request Resources</Link>
                     </div>
                 </div>
             </div>

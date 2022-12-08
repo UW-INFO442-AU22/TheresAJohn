@@ -76,6 +76,7 @@ router.post('/', async (req, res) => {
 
 /**
  * PATCH /api/post/donate
+ * Update quantityDonated by however much the client has requested.
  */
 router.patch('/donate', async (req, res) => {
   const postId = req.body.postID
@@ -94,6 +95,10 @@ router.patch('/donate', async (req, res) => {
   }
 })
 
+/**
+ * PATCH /api/post/complete
+ * Marks the state of a post as complete.
+ */
 router.patch('/complete', async (req, res) => {
   const postId = req.body.postID
   if (!(postId)) {
@@ -109,6 +114,10 @@ router.patch('/complete', async (req, res) => {
   }
 })
 
+/**
+ * PATCH /api/post
+ * Update the details for the specific resource
+ */
 router.patch('/', async (req, res) => {
   const resource = req.body.resource
   const quantity = req.body.quantity
